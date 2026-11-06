@@ -16,8 +16,14 @@ Desde la raíz del repo, sin dependencias:
 python3 -m planilla verify
 python3 -m planilla show WL7413
 python3 -m planilla compare ruta/a/otra_planilla.csv
+python3 -m planilla export-muestra
 python3 -m unittest discover -s tests -v
+npm install
+npm test
+npm run dev
 ```
+
+`npm run dev` abre la revisión en el navegador. Ahí se puede cargar el portafolio de ejemplo o **Cargar muestra de la planilla estándar**: 12 SKU reales, con la venta hasta octubre 2026 y el pronóstico de noviembre 2026 a diciembre 2027. Como no hay pronóstico y venta en el mismo mes, el error del modelo queda sin calcular y la pantalla revisa forma, negativos y pronósticos planos.
 
 `verify` revisa la planilla estándar. Sale con código 1 si se rompe el contrato.
 

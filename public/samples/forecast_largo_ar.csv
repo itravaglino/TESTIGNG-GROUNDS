@@ -1,0 +1,9 @@
+Codigo;Producto;Familia;Fecha;Modelo;Pronostico;Real
+A-100;Yerba 1kg;Infusiones;01/03/2024;Modelo A;1250,5;980,0
+A-100;Yerba 1kg;Infusiones;01/04/2024;Modelo A;1300,0;1180,0
+A-100;Yerba 1kg;Infusiones;01/05/2024;Modelo A;1280,0;1210,0
+A-100;Yerba 1kg;Infusiones;01/06/2024;Modelo A;1400,0;1350,0
+B-200;Aceite 900ml;Aceites;01/03/2024;Modelo A;2000,00;1760,5
+B-200;Aceite 900ml;Aceites;01/04/2024;Modelo A;2100,50;1980,0
+B-200;Aceite 900ml;Aceites;01/05/2024;Modelo A;2050,00;2010,0
+B-200;Aceite 900ml;Aceites;01/06/2024;Modelo A;2200,00;1900,0

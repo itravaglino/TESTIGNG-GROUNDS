@@ -3,6 +3,7 @@
 import sys
 from pathlib import Path
 
+from planilla.export_sample import SAMPLE_PATH, write_sample
 from planilla.sheet import load
 from planilla.verify import compare, verify
 
@@ -19,7 +20,8 @@ def main(argv: list[str]) -> int:
             "uso:\n"
             "  python3 -m planilla verify\n"
             "  python3 -m planilla compare RUTA.csv\n"
-            "  python3 -m planilla show SKU"
+            "  python3 -m planilla show SKU\n"
+            "  python3 -m planilla export-muestra"
         )
         return 0
     command, *rest = argv
@@ -55,6 +57,11 @@ def main(argv: list[str]) -> int:
         print("pronostico")
         for month, value in zip(forecast, row.forecast(len(history))):
             print(f"  {month.isoformat()}  {_fmt(value)}")
+        return 0
+    if command == "export-muestra":
+        target = Path(rest[0]) if rest else SAMPLE_PATH
+        written = write_sample(sheet, target)
+        print(f"muestra escrita en {target} ({written} filas)")
         return 0
     print(f"comando desconocido: {command}", file=sys.stderr)
     return 2

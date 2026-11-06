@@ -1,9 +1,11 @@
+import csv
 import tempfile
 import unittest
 from datetime import date
 from pathlib import Path
 
 from planilla.contract import FIXTURE
+from planilla.export_sample import write_sample
 from planilla.sheet import load, parse_number
 from planilla.verify import compare, verify
 
@@ -62,6 +64,22 @@ class ContractTest(unittest.TestCase):
         self.assertTrue(report.ok, report.render())
         self.assertIn("faltantes", report.render())
         self.assertNotIn("filas idénticas 1/1", report.render())
+
+    def test_export_muestra_keeps_history_and_forecast(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "muestra.csv"
+            written = write_sample(self.sheet, path, limit=12)
+            with path.open(encoding="utf-8", newline="") as handle:
+                rows = list(csv.reader(handle, delimiter=";"))
+        self.assertGreaterEqual(written, 12 * 132)
+        wl = [row for row in rows[1:] if row[0] == "WL7413"]
+        self.assertEqual(len(wl), 132)
+        october = next(row for row in wl if row[3] == "01/10/2026")
+        november = next(row for row in wl if row[3] == "01/11/2026")
+        self.assertEqual(october[5], "")
+        self.assertEqual(october[6], "6670")
+        self.assertEqual(november[6], "")
+        self.assertTrue(november[5].startswith("8415"))
 
 
 if __name__ == "__main__":
