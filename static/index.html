@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kalibra · Auditor de pronósticos</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <span class="mark">K</span>
+      <div>
+        <strong>Kalibra</strong>
+        <p>Auditor de pronósticos, producto por producto</p>
+      </div>
+    </div>
+    <p class="lede">Identifica el error, corrige lo que tiene arreglo y descarta lo que no se puede usar para comprar o producir.</p>
+  </header>
+
+  <main>
+    <section class="loader" id="loader">
+      <div class="drop" id="drop">
+        <h1>Subí el forecast</h1>
+        <p>CSV o XLSX. Hacen falta producto, fecha y pronóstico. Si viene la demanda real, el modelo o una banda, también se leen.</p>
+        <div class="actions">
+          <label class="button primary">
+            Elegir archivo
+            <input id="file" type="file" accept=".csv,.txt,.xlsx" hidden />
+          </label>
+          <button class="button" id="sample" type="button">Probar con el ejemplo</button>
+        </div>
+        <ul class="hints">
+          <li>Nombres en español o inglés: producto, fecha, pronóstico, real, modelo.</li>
+          <li>Fechas de América: día/mes/año. Decimales con coma o punto.</li>
+          <li>Separador coma, punto y coma o tab. Hasta 8 MB.</li>
+        </ul>
+      </div>
+      <p class="error" id="error" hidden></p>
+    </section>
+
+    <section class="work" id="work" hidden>
+      <div class="summary" id="summary"></div>
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Buscar producto o modelo" />
+        <div class="filters" id="filters">
+          <button type="button" data-filter="todos" class="on">Todos</button>
+          <button type="button" data-filter="corregir">Corregir</button>
+          <button type="button" data-filter="descartar">Descartar</button>
+          <button type="button" data-filter="mantener">Mantener</button>
+        </div>
+        <div class="actions">
+          <button class="button" id="again" type="button">Otro archivo</button>
+          <button class="button" id="csv" type="button">CSV corregido</button>
+          <button class="button" id="json" type="button">Informe JSON</button>
+        </div>
+      </div>
+      <div id="notices"></div>
+      <div class="split">
+        <aside id="list"></aside>
+        <article id="detail"></article>
+      </div>
+      <details class="method">
+        <summary>Cómo se decide</summary>
+        <p id="method"></p>
+      </details>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
