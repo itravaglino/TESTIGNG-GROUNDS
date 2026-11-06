@@ -1,0 +1,18 @@
+Standard planilla (unidades):
+  Forecast_mann_scenario_test4_unidades.csv
+
+SHA-256:
+  460fc728da72c9773f6cb8751176cfa11a11b0404fa0e51f6952c7fb4f8bb9e0
+
+Encoding of the full file:
+  cp1252 / latin-1 (not UTF-8). Descriptions contain byte 0xA1.
+
+Layout:
+  delimiter ;
+  30 metadata columns + 132 monthly columns (01/01/2017 .. 01/12/2027)
+  4402 unique product_id / SKU rows
+  history: 01/01/2017 .. 01/10/2026 (118 months, mostly integers, may be negative)
+  forecast: 01/11/2026 .. 01/12/2027 (14 months, often comma decimals)
+
+mini.csv and stratified.csv are UTF-8 subsets for fast tests.
+Do not invent a different header. Consume this contract via forecast_kit.schema.

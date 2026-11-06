@@ -1,0 +1,17 @@
+name: forecast-kit
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: unit tests
+        run: python3 -m unittest discover -s tests -v
+      - name: validate golden full
+        run: python3 -m forecast_kit validate fixtures/golden/Forecast_mann_scenario_test4_unidades.csv
