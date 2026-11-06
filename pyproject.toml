@@ -1,0 +1,9 @@
+[project]
+name = "planilla-estandar"
+version = "0.1.0"
+description = "Contrato y verificación de la planilla estándar de forecast MANN."
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
