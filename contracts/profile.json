@@ -1,0 +1,53 @@
+{
+  "source_filename": "Forecast_mann_scenario_test4_unidades_in__b7f0.csv",
+  "sha256": "460fc728da72c9773f6cb8751176cfa11a11b0404fa0e51f6952c7fb4f8bb9e0",
+  "bytes": 2354913,
+  "encoding": "windows-1252/latin-1",
+  "newline": "CRLF",
+  "delimiter": ";",
+  "decimal": ",",
+  "thousands": null,
+  "n_rows": 4402,
+  "n_columns": 162,
+  "n_history_months": 118,
+  "n_forecast_months": 14,
+  "history_start": "01/01/2017",
+  "history_end": "01/10/2026",
+  "forecast_start": "01/11/2026",
+  "forecast_end": "01/12/2027",
+  "unique_product_id": true,
+  "distributions": {
+    "Tipo de demanda": {
+      "Con tendencia": 439,
+      "Intermitente": 485,
+      "Erratica": 3260,
+      "Variable moderada": 218
+    },
+    "Cluster": {
+      "Mediano riesgo": 500,
+      "Bajo riesgo": 641,
+      "Alto riesgo": 3261
+    },
+    "ABC": {
+      "A": 188,
+      "B": 344,
+      "C": 3870
+    },
+    "Modelo": {
+      "auto_SARIMA": 3240,
+      "holtsWintersExponentialSmoothing": 669,
+      "prophet": 493
+    },
+    "Region": {
+      "VSF": 438,
+      "MTS": 911,
+      "MTO": 2918,
+      "REV": 113,
+      "BLOQUEADO": 22
+    },
+    "Cliente": {
+      "WIX": 2090,
+      "MANN-FILTER": 2312
+    }
+  }
+}

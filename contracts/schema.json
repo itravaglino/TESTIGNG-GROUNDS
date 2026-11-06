@@ -1,0 +1,51 @@
+{
+  "name": "planilla_estandar_forecast",
+  "delimiter": ";",
+  "decimal": ",",
+  "encodings": ["cp1252", "latin-1", "utf-8-sig"],
+  "date_header": "DD/MM/YYYY",
+  "meta_columns": [
+    "product_id",
+    "Familia",
+    "Region",
+    "Vendedor",
+    "Cliente",
+    "Categoria",
+    "Subcategoria",
+    "SKU",
+    "Descripcion",
+    "Tipo de demanda",
+    "Cluster",
+    "Error",
+    "ABC",
+    "Promedio",
+    "Desviacion Std",
+    "Coeficiente",
+    "YTD",
+    "QTD",
+    "MTD",
+    "FYTD",
+    "YTG",
+    "QTG",
+    "MTG",
+    "FYTG",
+    "Modelo",
+    "Precio Unitario",
+    "Costo Unitario",
+    "Reemplazado?",
+    "Reemplazado por",
+    "Descontinuado?"
+  ],
+  "vocabularies": {
+    "Tipo de demanda": ["Erratica", "Intermitente", "Con tendencia", "Variable moderada"],
+    "Cluster": ["Alto riesgo", "Mediano riesgo", "Bajo riesgo"],
+    "ABC": ["A", "B", "C"],
+    "Modelo": ["auto_SARIMA", "holtsWintersExponentialSmoothing", "prophet"],
+    "Region": ["MTO", "MTS", "VSF", "REV", "BLOQUEADO"]
+  },
+  "vintage_test4": {
+    "history_end": "2026-10-01",
+    "forecast_start": "2026-11-01",
+    "forecast_horizon_months": 14
+  }
+}
