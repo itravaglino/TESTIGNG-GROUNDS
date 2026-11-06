@@ -1,0 +1,9 @@
+[project]
+name = "auditor-forecasts"
+version = "1.0.0"
+description = "Auditor de forecasts: identifica, corrige y descarta pronósticos producto por producto."
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

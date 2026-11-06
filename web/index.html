@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Auditor de Forecasts</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="barra">
+    <div>
+      <p class="marca">Demanda</p>
+      <h1>Auditor de Forecasts</h1>
+    </div>
+    <p id="archivo-activo" class="archivo">Ningún archivo cargado</p>
+    <div class="acciones">
+      <button id="btn-dictamen" type="button" disabled>Exportar dictamen</button>
+      <button id="btn-corregido" type="button" disabled>Exportar forecast corregido</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="vacio" class="vacio">
+      <div>
+        <h2>Revisá el forecast antes de comprarlo</h2>
+        <p>El auditor marca, producto por producto, qué mantener, qué corregir y qué descartar. También dice con qué modelo rehacerlo y qué métrica mirar.</p>
+        <div id="drop" class="drop" tabindex="0">
+          <p>Arrastrá el CSV acá o elegí un archivo</p>
+          <label class="boton">
+            Elegir archivo
+            <input id="archivo" type="file" accept=".csv,.tsv,text/csv,text/tab-separated-values" hidden />
+          </label>
+        </div>
+        <button id="btn-ejemplo" class="boton primario" type="button">Cargar ejemplo</button>
+        <p class="columnas">Columnas: producto o SKU, fecha, pronóstico, y si la tenés, venta real. También sirven modelo, familia, canal y los límites del intervalo.</p>
+      </div>
+    </section>
+
+    <section id="trabajo" class="trabajo" hidden>
+      <div class="lectura" id="lectura" aria-live="polite"></div>
+      <section class="tablero" aria-label="Tablero del portafolio">
+        <h2>Tablero del portafolio</h2>
+        <div id="conteos" class="conteos"></div>
+        <div id="globales" class="globales"></div>
+      </section>
+      <div class="cuerpo">
+        <section class="lista">
+          <div class="filtros">
+            <div id="filtros" class="chips" role="group" aria-label="Filtrar por estado"></div>
+            <label class="buscar">
+              Buscar
+              <input id="buscar" type="search" placeholder="Producto" />
+            </label>
+            <button id="btn-orden" type="button">Volver al orden recomendado</button>
+          </div>
+          <div class="tabla-wrap">
+            <table id="tabla">
+              <thead>
+                <tr>
+                  <th data-col="producto">Producto</th>
+                  <th data-col="clase_sbc">Clase SBC</th>
+                  <th data-col="estado">Estado</th>
+                  <th data-col="modelo_recomendado">Modelo recomendado</th>
+                  <th data-col="modelo_respaldo">Modelo de respaldo</th>
+                  <th data-col="wape">WAPE</th>
+                  <th data-col="mase">MASE</th>
+                  <th data-col="sesgo">Sesgo</th>
+                  <th>Problema principal</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody id="cuerpo-tabla"></tbody>
+            </table>
+          </div>
+        </section>
+        <aside id="ficha" class="ficha" aria-live="polite">
+          <p class="pista">Elegí un producto de la tabla.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
