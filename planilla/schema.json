@@ -1,0 +1,83 @@
+{
+  "nombre": "planilla_estandar_forecast_mann",
+  "version": 1,
+  "descripcion": "Contrato de la planilla ancha de forecast (un producto por fila, meses en columnas). Este es el formato real a parsear; no es un CSV largo semanal.",
+  "encoding": "utf-8",
+  "delimiter": ";",
+  "decimal": ",",
+  "fecha_header": "DD/MM/YYYY",
+  "grano": "month",
+  "dia_del_mes": 1,
+  "columnas_meta": [
+    "product_id",
+    "Familia",
+    "Region",
+    "Vendedor",
+    "Cliente",
+    "Categoria",
+    "Subcategoria",
+    "SKU",
+    "Descripcion",
+    "Tipo de demanda",
+    "Cluster",
+    "Error",
+    "ABC",
+    "Promedio",
+    "Desviacion Std",
+    "Coeficiente",
+    "YTD",
+    "QTD",
+    "MTD",
+    "FYTD",
+    "YTG",
+    "QTG",
+    "MTG",
+    "FYTG",
+    "Modelo",
+    "Precio Unitario",
+    "Costo Unitario",
+    "Reemplazado?",
+    "Reemplazado por",
+    "Descontinuado?"
+  ],
+  "n_columnas_meta": 30,
+  "aliases_internos": {
+    "product_id": "product_id",
+    "sku": "SKU",
+    "producto": "Descripcion",
+    "categoria": "Categoria",
+    "ubicacion": "Region",
+    "modelo": "Modelo",
+    "forecast": "(columnas de mes con es_pronostico=true)",
+    "actual": "(columnas de mes con es_pronostico=false)"
+  },
+  "campos_obligatorios": ["product_id", "SKU"],
+  "valores_esperados": {
+    "Tipo de demanda": ["Erratica", "Intermitente", "Con tendencia", "Variable moderada"],
+    "Cluster": ["Alto riesgo", "Mediano riesgo", "Bajo riesgo"],
+    "ABC": ["A", "B", "C"],
+    "Modelo": ["auto_SARIMA", "holtsWintersExponentialSmoothing", "prophet"],
+    "Reemplazado?": ["Si", "No"],
+    "Descontinuado?": ["Si", "No"]
+  },
+  "corte_historia_pronostico": {
+    "metodo": "primera_columna_mensual_con_mayoria_decimal_coma",
+    "en_esta_planilla": {
+      "historia": ["2017-01-01", "2026-10-01"],
+      "pronostico": ["2026-11-01", "2027-12-01"]
+    }
+  },
+  "numeros": {
+    "separador_decimal": ",",
+    "separador_miles": null,
+    "negativos_permitidos_en_historia": true,
+    "enteros_tipicos_en_historia": true,
+    "decimales_tipicos_en_pronostico": true
+  },
+  "notas": [
+    "Familia puede venir vacia.",
+    "Promedio / Desviacion Std / Error son metadatos del origen; no usarlos como invariante estricta del parser.",
+    "Categoria 'Pick up' y 'PICK UP' coexisten.",
+    "Para metricas: melt a largo con fecha ISO, valor float, es_pronostico bool."
+  ]
+}

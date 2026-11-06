@@ -1,0 +1,56 @@
+{
+  "archivo": "Forecast_mann_scenario_test4_unidades.csv",
+  "encoding": "utf-8",
+  "delimiter": ";",
+  "decimal": ",",
+  "n_productos": 4402,
+  "n_columnas": 162,
+  "n_meses": 132,
+  "historia_inicio": "2017-01-01",
+  "historia_fin": "2026-10-01",
+  "pronostico_inicio": "2026-11-01",
+  "pronostico_fin": "2027-12-01",
+  "n_meses_historia": 118,
+  "n_meses_pronostico": 14,
+  "modelos": {
+    "auto_SARIMA": 3240,
+    "holtsWintersExponentialSmoothing": 669,
+    "prophet": 493
+  },
+  "tipos_demanda": {
+    "Con tendencia": 439,
+    "Intermitente": 485,
+    "Erratica": 3260,
+    "Variable moderada": 218
+  },
+  "clusters": {
+    "Mediano riesgo": 500,
+    "Bajo riesgo": 641,
+    "Alto riesgo": 3261
+  },
+  "abc": {
+    "A": 188,
+    "B": 344,
+    "C": 3870
+  },
+  "regiones": {
+    "VSF": 438,
+    "MTS": 911,
+    "MTO": 2918,
+    "REV": 113,
+    "BLOQUEADO": 22
+  },
+  "clientes": {
+    "WIX": 2090,
+    "MANN-FILTER": 2312
+  },
+  "producto_control": {
+    "product_id": "722344",
+    "sku": "WL7413",
+    "modelo": "auto_SARIMA",
+    "tipo_de_demanda": "Con tendencia",
+    "historia_2017_01": "3",
+    "historia_2026_10": "6670",
+    "pronostico_2026_11": "8415,25"
+  }
+}
