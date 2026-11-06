@@ -1,0 +1,2040 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auditor de pronósticos</title>
+<style>
+  :root {
+    --paper: #f4f1ea;
+    --paper-2: #faf8f4;
+    --ink: #1c1915;
+    --line: rgba(28, 25, 21, 0.22);
+    --line-strong: rgba(28, 25, 21, 0.45);
+    --red: #9d2c2c;
+    --amber: #8a5a12;
+    --green: #1f6b45;
+    --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
+    --mono: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  [hidden] { display: none !important; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.45;
+    border-left: 8px solid var(--ink);
+    accent-color: var(--ink);
+  }
+
+  .wrap {
+    max-width: 1180px;
+    padding: 1.15rem clamp(0.9rem, 2vw, 1.8rem) 2.6rem;
+  }
+
+  :focus { outline: none; }
+  :focus-visible,
+  h2[tabindex="-1"]:focus,
+  #ficha:focus,
+  #error:focus {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+
+  .skip {
+    position: absolute;
+    left: -999px;
+    top: 0;
+    background: var(--paper-2);
+    color: var(--ink);
+    padding: 0.4rem 0.6rem;
+  }
+  .skip:focus { left: 1rem; top: 1rem; z-index: 5; }
+
+  .sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem 1.5rem;
+    flex-wrap: wrap;
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.15rem;
+    position: relative;
+  }
+  .masthead::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 3px;
+    background: var(--red);
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(1.85rem, 3.2vw, 2.55rem);
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+    margin: 0.15rem 0 0.35rem;
+  }
+
+  h2 {
+    font-size: 0.92rem;
+    font-weight: 650;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 1.15rem 0 0.65rem;
+  }
+  #resultado > h2:first-child,
+  #entrada h2 { margin-top: 0; }
+
+  h2 .idx,
+  .kicker {
+    font-family: var(--mono);
+    color: var(--red);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    font-weight: 500;
+  }
+  h2 .idx { margin-right: 0.45rem; font-size: 0.75rem; }
+
+  h3.subhead,
+  h4 {
+    font-size: 0.78rem;
+    font-weight: 650;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0.9rem 0 0.4rem;
+  }
+
+  .lede { margin: 0; max-width: 40rem; }
+  .folio {
+    margin: 0;
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .kicker { margin: 0; }
+
+  .entry {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .dropzone {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.35rem;
+    min-height: 11.5rem;
+    padding: 0.9rem 1rem;
+    border: 1.5px dashed var(--line-strong);
+    background: var(--paper-2);
+    cursor: pointer;
+  }
+  .dropzone:hover,
+  .dropzone.focus { border-color: var(--ink); border-style: solid; }
+  .dropzone.drag {
+    border-style: solid;
+    border-color: var(--red);
+    background: #f8e8e6;
+  }
+
+  label.field {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.28rem;
+    font-size: 0.95rem;
+  }
+  .lbl {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  textarea,
+  select,
+  input[type="search"],
+  input[type="file"] {
+    font: inherit;
+    color: var(--ink);
+    background: var(--paper-2);
+    border: 1px solid var(--line-strong);
+    border-radius: 0;
+    padding: 0.45rem 0.55rem;
+    width: 100%;
+  }
+  textarea {
+    min-height: 11.5rem;
+    resize: vertical;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+  input[type="file"] { padding: 0.45rem; }
+
+  .hint, .file-line, .match, .meta, .totals, .quiet-line {
+    margin: 0.35rem 0 0;
+    font-size: 0.86rem;
+  }
+  .file-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.75rem;
+    align-items: center;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.9rem;
+  }
+
+  button {
+    font: inherit;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    border-radius: 0;
+    min-height: 40px;
+    padding: 0.4rem 0.75rem;
+    cursor: pointer;
+  }
+  button.primary {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  button.primary:hover { background: var(--red); border-color: var(--red); }
+  button.ghost:hover { border-color: var(--ink); background: #ebe6db; }
+  button.as-text {
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+  }
+  button.as-text:hover { color: var(--red); }
+  body[data-busy="1"] .actions button { opacity: 0.55; }
+
+  .alert {
+    border: 1px solid var(--red);
+    background: #f8e8e6;
+    color: var(--ink);
+    padding: 0.55rem 0.7rem;
+    margin: 0.75rem 0 0;
+  }
+  .status {
+    color: var(--green);
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    margin: 0.55rem 0 0;
+  }
+  .alert:empty, .status:empty { display: none; }
+
+  .note {
+    border: 1px solid var(--amber);
+    background: #f8f1e2;
+    padding: 0.55rem 0.7rem;
+    margin: 0 0 0.7rem;
+  }
+
+  .empty {
+    border: 1px dashed var(--line-strong);
+    padding: 0.9rem 1rem;
+    margin-top: 1rem;
+    background: var(--paper-2);
+  }
+  .empty p { margin: 0.35rem 0 0; }
+
+  .counters {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+  .counter {
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--ink);
+    padding: 0.55rem 0.6rem 0.5rem;
+  }
+  .counter.ok { border-top-color: var(--green); }
+  .counter.fix { border-top-color: var(--amber); }
+  .counter.drop { border-top-color: var(--red); }
+  .counter .n {
+    display: block;
+    font-size: 1.7rem;
+    line-height: 1;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+  }
+  .counter.ok .n { color: var(--green); }
+  .counter.fix .n { color: var(--amber); }
+  .counter.drop .n { color: var(--red); }
+  .counter .l {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.8rem;
+  }
+
+  .mix {
+    display: flex;
+    height: 8px;
+    width: 100%;
+    overflow: hidden;
+    background: rgba(28, 25, 21, 0.08);
+    margin: 0.55rem 0 0.2rem;
+  }
+  .mix span { display: block; height: 8px; }
+  .mix .seg-ok { background: var(--green); }
+  .mix .seg-fix { background: var(--amber); }
+  .mix .seg-drop { background: var(--red); }
+
+  .warnings {
+    border-left: 3px solid var(--amber);
+    background: #f8f1e2;
+    padding: 0.55rem 0.75rem;
+    margin: 0.75rem 0 0.2rem;
+  }
+  .warnings ul, .reasons, ol.improve { margin: 0.25rem 0 0; padding-left: 1.15rem; }
+  .warnings li, .reasons li, ol.improve li { margin: 0.25rem 0; }
+
+  ul.advice { list-style: none; padding: 0; margin: 0.2rem 0 0; }
+  ul.advice li { position: relative; padding-left: 0.95rem; margin: 0.4rem 0; }
+  ul.advice li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.45em;
+    width: 0.42rem;
+    height: 0.42rem;
+    background: var(--red);
+  }
+
+  .workbench {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.9fr);
+    gap: 1rem;
+    align-items: start;
+  }
+  .workbench.solo { grid-template-columns: minmax(0, 1fr); }
+  .list-col, .ficha { min-width: 0; }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 0.7rem;
+    align-items: flex-end;
+  }
+  .filters .grow { flex: 1 1 14rem; }
+  .filters select,
+  .filters input[type="search"] { min-height: 40px; }
+  #btn-csv { flex: 0 0 auto; }
+
+  .scroll-hint { display: none; margin: 0.45rem 0; font-size: 0.8rem; }
+
+  .table-scroll {
+    overflow: auto;
+    border: 1px solid var(--line-strong);
+    background: var(--paper-2);
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  table { width: 100%; border-collapse: collapse; min-width: 760px; }
+  .preview-scroll table { min-width: 0; }
+
+  th, td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.38rem 0.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .file-field { margin-top: 0.55rem; }
+  #productos thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: #e7e1d4;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  td.num, th.num {
+    text-align: right;
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.84rem;
+  }
+  th.sku, th.sku button, td.sku, td.sku button { font-family: var(--mono); font-size: 0.82rem; white-space: nowrap; }
+  td { overflow-wrap: break-word; }
+  .nowrap { white-space: nowrap; }
+  #productos tbody tr[data-i] { cursor: pointer; }
+  #productos tbody tr[data-i]:hover { background: #ebe4d6; }
+  #productos tbody tr.is-selected,
+  #productos tbody tr.is-selected:hover {
+    background: #e7dcc6;
+    box-shadow: inset 3px 0 0 var(--red);
+  }
+  td.empty-cell { cursor: default; color: var(--ink); }
+
+  .tag {
+    display: inline-block;
+    border: 1px solid var(--ink);
+    padding: 0.02rem 0.35rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    line-height: 1.45;
+    background: transparent;
+    color: var(--ink);
+  }
+  .tag.ok { border-color: var(--green); background: #e7f2eb; }
+  .tag.fix { border-color: var(--amber); background: #f8f1e2; }
+  .tag.drop { border-color: var(--red); background: #f8e8e6; }
+
+  .ficha {
+    position: sticky;
+    top: 0.75rem;
+    max-height: calc(100vh - 1.5rem);
+    overflow: auto;
+    border: 1px solid var(--ink);
+    background: var(--paper-2);
+    padding: 0.85rem 0.9rem 1rem;
+  }
+  .ficha-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .ficha-top .ghost { white-space: nowrap; }
+  .ficha h3 {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    text-transform: none;
+    margin: 0.15rem 0 0;
+  }
+  .fname { margin: 0.15rem 0 0; }
+  .fmeta { margin: 0.15rem 0 0; font-size: 0.88rem; }
+  .block { margin-top: 0.35rem; }
+  .verdict-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 0.8rem;
+    align-items: center;
+    margin: 0.2rem 0;
+  }
+  .score-line { font-variant-numeric: tabular-nums; }
+
+  .finding {
+    --sev: var(--ink);
+    border-left: 3px solid var(--sev);
+    background: var(--paper);
+    padding: 0.5rem 0.65rem;
+    margin: 0 0 0.45rem;
+  }
+  .finding.high { --sev: var(--red); }
+  .finding.mid { --sev: var(--amber); }
+  .finding.low { --sev: var(--green); }
+  .finding header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 0.5rem;
+    align-items: baseline;
+  }
+  .finding p { margin: 0.3rem 0 0; }
+  .sev {
+    color: var(--sev);
+    border: 1px solid var(--sev);
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.02rem 0.3rem;
+  }
+  .fid { font-family: var(--mono); font-size: 0.75rem; }
+
+  .block-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0.45rem 0 0.12rem;
+  }
+
+  dl.stats {
+    display: grid;
+    grid-template-columns: minmax(7.5rem, 40%) 1fr;
+    gap: 0.18rem 0.75rem;
+    margin: 0.2rem 0 0;
+  }
+  dt { font-family: var(--mono); font-size: 0.75rem; }
+  dd { margin: 0; }
+  dl.gloss dt {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.8rem;
+    margin-top: 0.6rem;
+    padding-top: 0.35rem;
+    border-top: 1px solid var(--line);
+    font-weight: 650;
+  }
+  dl.gloss dd { margin: 0.12rem 0 0; font-size: 0.9rem; }
+  .gloss .num { font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 500; }
+
+  .rec { border-top: 1px solid var(--line); padding: 0.5rem 0 0.15rem; }
+  .rec-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 0.6rem;
+    align-items: baseline;
+  }
+  .rank { font-family: var(--mono); color: var(--red); min-width: 1.1rem; }
+  .fit {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .rec-meta { margin: 0.15rem 0 0; font-size: 0.88rem; }
+  .rec p { margin: 0.15rem 0 0; }
+
+  .preview-scroll {
+    max-height: 240px;
+    overflow: auto;
+    border: 1px solid var(--line);
+    margin-top: 0.35rem;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .preview-scroll th {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 500;
+    background: #e7e1d4;
+    position: sticky;
+    top: 0;
+  }
+  tr.changed td.corr { color: var(--green); font-weight: 650; }
+
+  .foot {
+    margin-top: 1.6rem;
+    padding-top: 0.7rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.8rem;
+  }
+  .foot p { margin: 0; }
+
+  @media (max-width: 960px) {
+    .workbench,
+    .workbench.solo { grid-template-columns: minmax(0, 1fr); }
+    .ficha { position: static; max-height: none; }
+  }
+  @media (max-width: 800px) {
+    .entry { grid-template-columns: 1fr; }
+    .counters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .scroll-hint { display: block; }
+    .table-scroll { max-height: none; }
+  }
+  @media (min-width: 961px) {
+    .table-scroll { max-height: calc(100vh - 8rem); }
+  }
+  @media (max-width: 640px) {
+    body { border-left-width: 5px; font-size: 14.5px; }
+    .folio { text-align: left; }
+    .actions button { flex: 1 1 calc(50% - 0.5rem); }
+    .ficha-top { flex-direction: column; }
+    dl.stats { grid-template-columns: 1fr; }
+    dl.stats dt { margin-top: 0.35rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+
+  @media print {
+    body { border-left: none; background: #fff; }
+    .wrap { max-width: none; padding: 0; }
+    #entrada, .skip, .scroll-hint { display: none !important; }
+    .ficha { position: static; max-height: none; overflow: visible; }
+    .table-scroll, .preview-scroll { max-height: none; overflow: visible; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#entrada">Saltar a la entrada</a>
+<div class="wrap">
+  <header class="masthead">
+    <div>
+      <p class="kicker">Mesa de control · pronósticos</p>
+      <h1>Auditor de pronósticos</h1>
+      <p class="lede">Identifica, corrige o descarta pronósticos malos, producto por producto.</p>
+    </div>
+    <p class="folio">Hoja de trabajo<br>mismo origen</p>
+  </header>
+
+  <main id="main">
+    <section id="entrada" aria-labelledby="titulo-entrada">
+      <h2 id="titulo-entrada"><span class="idx">01</span> Entrada</h2>
+      <form id="form-analizar">
+        <div class="entry">
+          <div>
+            <div class="dropzone" id="drop" tabindex="0" role="button" aria-labelledby="drop-kicker" aria-describedby="drop-text">
+              <span class="kicker" id="drop-kicker">Soltar CSV</span>
+              <span id="drop-text">Arrastre un archivo aquí o use el selector.</span>
+            </div>
+            <div class="file-field">
+              <label class="field" for="file">
+                <span class="lbl">Archivo CSV</span>
+                <input id="file" name="file" type="file" accept=".csv,text/csv,text/plain,.txt,.tsv">
+              </label>
+            </div>
+            <p class="file-line">
+              <span id="file-name">Ningún archivo seleccionado</span>
+              <button type="button" id="btn-quitar" class="ghost" hidden>Quitar archivo</button>
+            </p>
+          </div>
+          <div>
+            <label class="field" for="paste">
+              <span class="lbl">Pegar CSV</span>
+              <textarea id="paste" spellcheck="false" autocomplete="off" aria-describedby="paste-help" placeholder="product_id,date,forecast,actual&#10;SKU-1,2024-01-01,120,118"></textarea>
+            </label>
+            <p id="paste-help" class="hint">Si hay un archivo, se envía el archivo. Si no, este texto sale como text/plain. Ctrl+Enter o ⌘+Enter analiza.</p>
+          </div>
+        </div>
+        <p id="hint" class="hint" aria-live="polite">Ninguna serie lista.</p>
+        <div class="actions">
+          <button type="submit" class="primary" id="btn-analizar">Analizar</button>
+          <button type="button" class="ghost" id="btn-plantilla">Descargar plantilla</button>
+          <button type="button" class="ghost" id="btn-corregida">Bajar serie corregida</button>
+          <button type="button" class="ghost" id="btn-ejemplo">Ver ejemplo</button>
+        </div>
+      </form>
+      <div id="status" class="status" role="status"></div>
+      <div id="error" class="alert" role="alert" tabindex="-1"></div>
+    </section>
+
+    <section id="vacio" class="empty" aria-labelledby="titulo-vacio">
+      <h2 id="titulo-vacio"><span class="idx">02</span> Sin informe todavía</h2>
+      <p>Cargue un CSV, pegue la serie o pulse Ver ejemplo. El resumen y la tabla aparecen con el informe.</p>
+    </section>
+
+    <section id="resultado" hidden>
+      <h2 id="titulo-resumen" tabindex="-1"><span class="idx">02</span> Resumen</h2>
+      <p id="sample-note" class="note" hidden>Ejemplo de demostración. La serie corregida solo sale de un archivo o de un texto pegado.</p>
+      <p id="meta" class="meta"></p>
+      <div id="counters" class="counters"></div>
+      <div id="mix" class="mix" hidden aria-hidden="true"></div>
+      <p id="totals" class="totals"></p>
+      <div id="warnings"></div>
+      <h3 class="subhead">Consejo de cartera</h3>
+      <div id="advice"></div>
+
+      <h2 id="titulo-productos"><span class="idx">03</span> Productos</h2>
+      <div id="workbench" class="workbench solo">
+        <div class="list-col">
+          <div class="filters">
+            <label class="field" for="filtro-decision">
+              <span class="lbl">Decisión</span>
+              <select id="filtro-decision">
+                <option value="all">Todas</option>
+                <option value="aprobar">aprobar</option>
+                <option value="corregir">corregir</option>
+                <option value="descartar">descartar</option>
+              </select>
+            </label>
+            <label class="field grow" for="filtro-sku">
+              <span class="lbl">Buscar por SKU</span>
+              <input id="filtro-sku" type="search" inputmode="search" autocomplete="off" spellcheck="false" placeholder="SKU">
+            </label>
+            <button type="button" class="ghost" id="btn-csv">Descargar tabla CSV</button>
+          </div>
+          <p id="match-count" class="match" aria-live="polite"></p>
+          <p class="scroll-hint">Deslice en horizontal para ver todas las columnas.</p>
+          <div class="table-scroll">
+            <table id="productos">
+              <caption class="sr">Productos del informe. Active un SKU para abrir su ficha.</caption>
+              <thead>
+                <tr>
+                  <th scope="col">SKU</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Ubicación</th>
+                  <th scope="col">Decisión</th>
+                  <th scope="col" class="num">Puntuación</th>
+                  <th scope="col">Clase de demanda</th>
+                  <th scope="col" class="num">WAPE</th>
+                  <th scope="col" class="num">Sesgo</th>
+                  <th scope="col">Modelo sugerido</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <section id="ficha" class="ficha" tabindex="-1" role="region" aria-label="Ficha del producto" hidden></section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Frecuencia: D diario, W semanal, M mensual, Q trimestral, Y anual, irregular. Decisiones: aprobar, corregir, descartar. Un guion (—) indica un valor nulo.</p>
+  </footer>
+</div>
+<noscript><p class="alert">Esta página necesita JavaScript para hablar con el auditor.</p></noscript>
+
+<script>
+(function () {
+  "use strict";
+
+  var PERCENT_UNITS = { "%": 1, percent: 1, pct: 1, porcentaje: 1, ratio: 1, fraction: 1, rate: 1 };
+  var ALREADY_PERCENT = { smape: 1, s_mape: 1, bias_pct: 1, pct_bias: 1, bias_percent: 1, mpe: 1, mape: 1, mape_positive_only: 1, mdape: 1 };
+  var RATIO_PERCENT = {
+    wape: 1, fva: 1, fva_vs_naive: 1, fva_vs_seasonal_naive: 1, forecast_value_added: 1,
+    hit_rate_10: 1, hit_rate_20: 1, over_forecast_pct: 1, under_forecast_pct: 1,
+    zero_forecast_pct: 1, negative_forecast_pct: 1, missing_forecast_pct: 1,
+    zero_actual_pct: 1, negative_actual_pct: 1, zero_share: 1, zeros_share: 1,
+    pct_zeros: 1, zero_fraction: 1, sparsity: 1, seasonality_strength: 1, flatness: 1
+  };
+  var CLASS_KEYS = ["demand_class", "demandclass", "clase_demanda", "clase", "class", "sbc_class", "sbc", "sb_class", "category_class", "demand_pattern", "adi_cv_class", "class_name"];
+  var PROFILE_LABELS = {
+    demand_class: "Clase de demanda",
+    clase: "Clase de demanda",
+    clase_demanda: "Clase de demanda",
+    class: "Clase de demanda",
+    sbc: "Clase SBC",
+    sbc_class: "Clase SBC",
+    adi: "ADI",
+    intermittency_adi: "ADI",
+    cv2: "CV²",
+    cv_2: "CV²",
+    cv_squared: "CV²",
+    cv2_nonzero_actual: "CV²",
+    n_forecast: "Pronósticos",
+    n_actual: "Reales",
+    n_overlap: "Solapes",
+    zero_forecast_pct: "Pronósticos en cero",
+    negative_forecast_pct: "Pronósticos negativos",
+    missing_forecast_pct: "Pronósticos ausentes",
+    zero_actual_pct: "Reales en cero",
+    negative_actual_pct: "Reales negativos",
+    mean_forecast: "Media del pronóstico",
+    std_forecast: "Desvío del pronóstico",
+    cv_forecast: "CV del pronóstico",
+    mean_actual: "Media real",
+    cv_actual: "CV real",
+    trend_slope_per_period: "Pendiente por período",
+    trend_direction: "Tendencia",
+    seasonality_strength: "Fuerza estacional",
+    missing_date_gaps: "Huecos de fecha",
+    unique_forecast_values: "Valores distintos del pronóstico",
+    flatness: "Planitud",
+    history_ratio: "Ratio de histórico",
+    last_actual: "Último real",
+    last_forecast: "Último pronóstico",
+    mean: "Media",
+    avg: "Media",
+    average: "Media",
+    std: "Desviación típica",
+    stdev: "Desviación típica",
+    sd: "Desviación típica",
+    var: "Varianza",
+    variance: "Varianza",
+    n: "Observaciones",
+    n_obs: "Observaciones",
+    n_observations: "Observaciones",
+    observations: "Observaciones",
+    count: "Observaciones",
+    history_length: "Longitud del histórico",
+    zeros: "Ceros",
+    zero_count: "Ceros",
+    n_zeros: "Ceros",
+    zero_share: "Proporción de ceros",
+    zeros_share: "Proporción de ceros",
+    pct_zeros: "Proporción de ceros",
+    zero_fraction: "Proporción de ceros",
+    seasonal: "Estacional",
+    seasonality: "Estacionalidad",
+    seasonal_period: "Periodo estacional",
+    period: "Periodo",
+    trend: "Tendencia",
+    history_start: "Inicio del histórico",
+    history_end: "Fin del histórico",
+    start: "Inicio",
+    end: "Fin",
+    horizon: "Horizonte",
+    intermittence: "Intermitencia",
+    min: "Mínimo",
+    max: "Máximo",
+    median: "Mediana",
+    p50: "Mediana",
+    sum: "Suma",
+    volume: "Volumen",
+    cadence: "Cadencia"
+  };
+
+  var METRICS = [
+    { label: "WAPE", kind: "pct", keys: ["wape"], text: "Error porcentual absoluto ponderado. Suma de los errores absolutos dividida por la suma de la demanda real. Un 20 % quiere decir que el error total pesa una quinta parte de la demanda. Aguanta los ceros mejor que el MAPE." },
+    { label: "sMAPE", kind: "pct", keys: ["smape", "s_mape"], text: "Error porcentual absoluto simétrico. Promedia el error absoluto respecto a la semisuma del real y del pronóstico. Acota el porcentaje cuando los valores son pequeños y no trata igual el exceso y el defecto." },
+    { label: "MASE", kind: "num", keys: ["mase"], text: "Error absoluto medio escalado. Compara el error del modelo con el de un pronóstico ingenuo (el último dato, o el de la misma estación). Por debajo de 1 el modelo gana al ingenuo; por encima, el ingenuo es mejor referencia." },
+    { label: "Sesgo", kind: "pct", keys: ["bias_pct", "pct_bias", "bias_percent", "bias", "sesgo"], text: "Error con signo como porcentaje de la demanda: pronóstico menos real. Positivo: el pronóstico se va por arriba. Negativo: se queda corto. Cerca de cero no hay una inclinación sistemática." },
+    { label: "FVA", kind: "pct", keys: ["fva_vs_naive", "fva", "forecast_value_added", "fva_vs_seasonal_naive"], text: "Valor añadido del pronóstico frente a un ingenuo: 1 menos el error del modelo partido por el del ingenuo. Si es positivo, el modelo aporta. Si es nulo o negativo, el ingenuo basta." },
+    { label: "Señal de seguimiento", kind: "num", keys: ["tracking_signal", "tracking", "tracking_signal_mad"], text: "Suma de los errores (pronóstico menos real) dividida por el error absoluto medio. Si se aleja de cero y no vuelve, el modelo se está yendo y hay que revisarlo." },
+    { label: "Theil U2", kind: "num", keys: ["theil_u2", "theil", "u2", "theils_u2"], text: "RMSE del modelo dividido por el RMSE de un pronóstico ingenuo de no cambio. Menor que 1 mejora al ingenuo. Mayor que 1: el ingenuo conviene más." },
+    { label: "ADI", kind: "num", keys: ["intermittency_adi", "adi", "average_demand_interval"], text: "Intervalo medio entre demandas. Dice cada cuántos periodos aparece una venta distinta de cero. Un valor alto describe una serie intermitente, con muchos ceros." },
+    { label: "CV²", kind: "num", keys: ["cv2_nonzero_actual", "cv2", "cv_2", "cv_squared", "cv²"], text: "Cuadrado del coeficiente de variación de los tamaños de demanda cuando sí hay venta. Un valor alto significa volumen irregular. Junto con el ADI separa demanda suave, intermitente, errática y grumosa." }
+  ];
+
+  var FREQ = {
+    D: "diario", d: "diario", daily: "diario", diario: "diario",
+    W: "semanal", w: "semanal", weekly: "semanal", semanal: "semanal",
+    M: "mensual", m: "mensual", monthly: "mensual", mensual: "mensual",
+    Q: "trimestral", q: "trimestral", quarterly: "trimestral", trimestral: "trimestral",
+    Y: "anual", y: "anual", yearly: "anual", annual: "anual", anual: "anual",
+    irregular: "irregular",
+    h: "horaria", H: "horaria", hourly: "horaria",
+    B: "días hábiles", b: "días hábiles", business: "días hábiles"
+  };
+
+  var state = {
+    file: null,
+    report: null,
+    sample: false,
+    decision: "all",
+    query: "",
+    selected: null,
+    scoreScale: 1
+  };
+  var busy = false;
+  var dragDepth = 0;
+
+  var form = document.getElementById("form-analizar");
+  var fileInput = document.getElementById("file");
+  var pasteEl = document.getElementById("paste");
+  var drop = document.getElementById("drop");
+  var dropKicker = document.getElementById("drop-kicker");
+  var dropText = document.getElementById("drop-text");
+  var fileNameEl = document.getElementById("file-name");
+  var btnQuitar = document.getElementById("btn-quitar");
+  var hint = document.getElementById("hint");
+  var statusEl = document.getElementById("status");
+  var errorEl = document.getElementById("error");
+  var mainEl = document.getElementById("main");
+  var vacio = document.getElementById("vacio");
+  var resultado = document.getElementById("resultado");
+  var sampleNote = document.getElementById("sample-note");
+  var metaEl = document.getElementById("meta");
+  var counters = document.getElementById("counters");
+  var mix = document.getElementById("mix");
+  var totals = document.getElementById("totals");
+  var warnings = document.getElementById("warnings");
+  var advice = document.getElementById("advice");
+  var workbench = document.getElementById("workbench");
+  var ficha = document.getElementById("ficha");
+  var tbody = document.querySelector("#productos tbody");
+  var matchEl = document.getElementById("match-count");
+  var filtroDecision = document.getElementById("filtro-decision");
+  var filtroSku = document.getElementById("filtro-sku");
+
+  function el(tag, props) {
+    var node = document.createElement(tag);
+    var p = props || {};
+    if (p.class) node.className = p.class;
+    if (p.text != null) node.textContent = String(p.text);
+    if (p.attrs) {
+      Object.keys(p.attrs).forEach(function (k) {
+        if (p.attrs[k] != null && p.attrs[k] !== false) node.setAttribute(k, String(p.attrs[k]));
+      });
+    }
+    (p.children || []).forEach(function (child) {
+      if (child != null) node.append(child);
+    });
+    return node;
+  }
+
+  function clear(node) {
+    while (node.firstChild) node.removeChild(node.firstChild);
+  }
+
+  function motion() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+  }
+
+  function setStatus(msg) {
+    statusEl.textContent = msg || "";
+    if (msg) errorEl.textContent = "";
+  }
+
+  function showError(msg) {
+    errorEl.textContent = msg || "No se pudo completar la operación.";
+    statusEl.textContent = "";
+    errorEl.focus();
+  }
+
+  function fmtFixed(n, digits) {
+    return n.toLocaleString("es-ES", {
+      minimumFractionDigits: digits,
+      maximumFractionDigits: digits
+    });
+  }
+
+  function fmtInt(v) {
+    if (v == null || v === "") return "—";
+    var n = Number(v);
+    if (!Number.isFinite(n)) return "—";
+    return Math.round(n).toLocaleString("es-ES");
+  }
+
+  function fmtQty(v) {
+    if (v == null || v === "") return "—";
+    var n = Number(v);
+    if (!Number.isFinite(n)) return String(v);
+    return n.toLocaleString("es-ES", { maximumFractionDigits: 2 });
+  }
+
+  function formatByKind(kind, value, unit, key) {
+    if (value == null || value === "") return "—";
+    if (typeof value === "boolean") return value ? "sí" : "no";
+    var n = Number(value);
+    if (!Number.isFinite(n)) return String(value);
+    var u = String(unit || "").trim().toLowerCase();
+    var k = String(key || "").toLowerCase();
+    if (u && !PERCENT_UNITS[u]) return fmtQty(n) + "\u00a0" + String(unit);
+    if (ALREADY_PERCENT[k] || u === "%" || u === "percent" || u === "pct" || u === "porcentaje") {
+      return fmtFixed(n, 1) + "\u00a0%";
+    }
+    if (RATIO_PERCENT[k] || u === "ratio" || u === "fraction" || u === "rate") {
+      return fmtFixed(n * 100, 1) + "\u00a0%";
+    }
+    if (kind === "pct") {
+      var scaled = Math.abs(n) <= 1.5 ? n * 100 : n;
+      return fmtFixed(scaled, 1) + "\u00a0%";
+    }
+    return fmtFixed(n, 2);
+  }
+
+  function fmtScore(v) {
+    if (v == null || v === "") return "—";
+    var n = Number(v);
+    if (!Number.isFinite(n)) return String(v);
+    return fmtFixed(n * state.scoreScale, 1);
+  }
+
+  function fmtMedian(v) {
+    if (v == null || v === "") return "—";
+    return formatByKind("pct", v, null, "wape");
+  }
+
+  function fmtFit(v) {
+    if (v == null || v === "") return "";
+    if (typeof v === "boolean") return v ? "sí" : "no";
+    var n = Number(v);
+    if (typeof v === "number" || (typeof v === "string" && String(v).trim() !== "" && Number.isFinite(n))) {
+      if (Math.abs(n) <= 1) return formatByKind("pct", n, null);
+      return fmtFixed(n, 2);
+    }
+    return String(v);
+  }
+
+  function fmtDay(v) {
+    if (v == null || v === "") return "—";
+    var s = String(v).trim();
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s);
+    if (m) return m[3] + "/" + m[2] + "/" + m[1];
+    return s;
+  }
+
+  function fmtStamp(v) {
+    if (v == null || v === "") return "—";
+    var s = String(v).trim();
+    var m = /^(\d{4})-(\d{2})-(\d{2})[T\s](\d{2}):(\d{2})/.exec(s);
+    if (m) return m[3] + "/" + m[2] + "/" + m[1] + " " + m[4] + ":" + m[5];
+    return fmtDay(s);
+  }
+
+  function fmtFreq(v) {
+    if (v == null || String(v).trim() === "") return "—";
+    var key = String(v).trim();
+    return FREQ[key] || FREQ[key.toLowerCase()] || key;
+  }
+
+  function looksLikeDate(v) {
+    return typeof v === "string" && /^\d{4}-\d{2}-\d{2}/.test(v);
+  }
+
+  function normDecision(d) {
+    var x = String(d == null ? "" : d).trim().toLowerCase();
+    if (!x) return "";
+    if (["aprobar", "aprobado", "approve", "approved", "accept", "accepted", "keep", "ok"].indexOf(x) !== -1) return "aprobar";
+    if (["corregir", "corregido", "correct", "corrected", "adjust", "revise", "fix"].indexOf(x) !== -1) return "corregir";
+    if (["descartar", "descartado", "reject", "rejected", "discard", "drop", "exclude"].indexOf(x) !== -1) return "descartar";
+    return x;
+  }
+
+  function tagClass(d) {
+    if (d === "aprobar") return "tag ok";
+    if (d === "corregir") return "tag fix";
+    if (d === "descartar") return "tag drop";
+    return "tag other";
+  }
+
+  function translateClass(v) {
+    var s = String(v).trim();
+    var map = {
+      smooth: "suave",
+      intermittent: "intermitente",
+      erratic: "errática",
+      lumpy: "grumosa",
+      unknown: "desconocida",
+      irregular: "irregular",
+      seasonal: "estacional",
+      new: "nueva",
+      obsolete: "obsoleta",
+      stable: "estable",
+      unstable: "inestable",
+      continuous: "continua"
+    };
+    return map[s.toLowerCase()] || s;
+  }
+
+  function isClassKey(key) {
+    return CLASS_KEYS.indexOf(String(key).toLowerCase()) !== -1;
+  }
+
+  function asTextList(v) {
+    if (v == null || v === "") return [];
+    var arr = Array.isArray(v) ? v : [v];
+    var out = [];
+    arr.forEach(function (item) {
+      if (item == null || item === "") return;
+      if (typeof item === "string" || typeof item === "number" || typeof item === "boolean") {
+        out.push(String(item));
+        return;
+      }
+      if (typeof item === "object") {
+        var parts = [item.title, item.detail, item.text, item.message, item.reason, item.description, item.action].filter(function (x) {
+          return x != null && String(x).trim() !== "";
+        });
+        if (parts.length) out.push(parts.join(" — "));
+        else {
+          try { out.push(JSON.stringify(item)); } catch (err) { /* ignore */ }
+        }
+      }
+    });
+    return out;
+  }
+
+  function skuOf(p) {
+    if (!p) return "";
+    if (p.product_id != null && p.product_id !== "") return String(p.product_id);
+    if (p.sku != null && p.sku !== "") return String(p.sku);
+    return "";
+  }
+
+  function bagsFor(product) {
+    var bags = [];
+    if (!product || typeof product !== "object") return bags;
+    var metrics = product.metrics;
+    if (Array.isArray(metrics)) {
+      var obj = {};
+      metrics.forEach(function (item) {
+        if (!item || typeof item !== "object") return;
+        var key = item.name || item.id || item.metric || item.key;
+        if (!key) return;
+        obj[String(key)] = item;
+      });
+      bags.push(obj);
+    } else if (metrics && typeof metrics === "object") {
+      bags.push(metrics);
+      Object.keys(metrics).forEach(function (k) {
+        var v = metrics[k];
+        if (v && typeof v === "object" && !Array.isArray(v)) bags.push(v);
+      });
+    }
+    if (product.profile && typeof product.profile === "object" && !Array.isArray(product.profile)) bags.push(product.profile);
+    return bags;
+  }
+
+  function lookupMetric(product, metric) {
+    var bags = bagsFor(product);
+    for (var w = 0; w < metric.keys.length; w += 1) {
+      var want = metric.keys[w].toLowerCase();
+      for (var b = 0; b < bags.length; b += 1) {
+        var bag = bags[b];
+        var keys = Object.keys(bag);
+        for (var i = 0; i < keys.length; i += 1) {
+          if (keys[i].toLowerCase() !== want) continue;
+          var raw = bag[keys[i]];
+          if (raw && typeof raw === "object" && !Array.isArray(raw) && ("value" in raw || "val" in raw || "score" in raw)) {
+            var value = raw.value != null ? raw.value : (raw.val != null ? raw.val : raw.score);
+            return { present: true, value: value, unit: raw.unit || raw.units || raw.u || null, key: keys[i] };
+          }
+          return { present: true, value: raw, unit: null, key: keys[i] };
+        }
+      }
+    }
+    return { present: false, value: null, unit: null, key: null };
+  }
+
+  function verdictOf(p) {
+    var v = p && p.verdict;
+    if (v == null) return {};
+    if (typeof v === "string") return { decision: v, score: null, reasons: [] };
+    if (typeof v === "object") return v;
+    return {};
+  }
+
+  function demandClass(product) {
+    var profile = product && product.profile;
+    if (typeof profile === "string" && profile.trim()) return translateClass(profile.trim());
+    if (profile && typeof profile === "object") {
+      for (var i = 0; i < CLASS_KEYS.length; i += 1) {
+        var key = CLASS_KEYS[i];
+        var hit = Object.keys(profile).filter(function (k) { return k.toLowerCase() === key; })[0];
+        if (!hit) continue;
+        var value = profile[hit];
+        if (value && typeof value === "object" && "value" in value) value = value.value;
+        if (value == null || value === "") continue;
+        if (typeof value === "string" || typeof value === "number") return translateClass(value);
+      }
+    }
+    return "—";
+  }
+
+  function suggestedModel(p) {
+    var recs = Array.isArray(p && p.recommendations) ? p.recommendations.filter(Boolean) : [];
+    recs = recs.slice().sort(function (a, b) {
+      var ra = Number(a.rank);
+      var rb = Number(b.rank);
+      if (Number.isFinite(ra) && Number.isFinite(rb)) return ra - rb;
+      if (Number.isFinite(ra)) return -1;
+      if (Number.isFinite(rb)) return 1;
+      return 0;
+    });
+    if (!recs.length) return "—";
+    return String(recs[0].alias || recs[0].model || "—");
+  }
+
+  function rowCells(p) {
+    var verdict = verdictOf(p);
+    var decision = normDecision(verdict.decision);
+    var wape = lookupMetric(p, METRICS[0]);
+    var bias = lookupMetric(p, METRICS[3]);
+    return [
+      skuOf(p) || "—",
+      (p && (p.product_name || p.name)) || "—",
+      (p && (p.location || p.ubicacion)) || "—",
+      decision || "—",
+      fmtScore(verdict.score),
+      demandClass(p),
+      wape.present ? formatByKind("pct", wape.value, wape.unit, wape.key) : "—",
+      bias.present ? formatByKind("pct", bias.value, bias.unit, bias.key) : "—",
+      suggestedModel(p)
+    ];
+  }
+
+  function fmtWorst(w) {
+    if (w == null || w === "") return "—";
+    if (Array.isArray(w)) {
+      if (!w.length) return "—";
+      return w.map(function (item) { return fmtWorst(item); }).join(" · ");
+    }
+    if (typeof w === "string" || typeof w === "number") return String(w);
+    if (typeof w === "object") {
+      var id = w.product_id != null ? w.product_id : (w.sku != null ? w.sku : (w.id != null ? w.id : ""));
+      var name = w.product_name || w.name || "";
+      var loc = w.location != null && w.location !== "" ? String(w.location) : "";
+      var decision = normDecision(w.decision);
+      var score = w.score != null ? fmtScore(w.score) : "";
+      var parts = [];
+      if (id !== "" && id != null) parts.push(String(id));
+      if (name) parts.push(String(name));
+      if (loc && parts.indexOf(loc) === -1) parts.push(loc);
+      if (decision) parts.push(decision);
+      var s = parts.join(" · ");
+      if (score && score !== "—") s = s ? (s + " · " + score) : score;
+      return s || "—";
+    }
+    return "—";
+  }
+
+  function detectScoreScale(report) {
+    var vals = [];
+    function push(v) {
+      var n = Number(v);
+      if (Number.isFinite(n)) vals.push(n);
+    }
+    if (report.summary) push(report.summary.avg_score);
+    (report.products || []).forEach(function (p) {
+      if (p && p.verdict) push(p.verdict.score);
+    });
+    if (vals.length && vals.every(function (n) { return Math.abs(n) <= 1; })) return 100;
+    return 1;
+  }
+
+  function numOrNull(v) {
+    if (v == null || v === "") return null;
+    var n = Number(v);
+    return Number.isFinite(n) ? n : null;
+  }
+
+  function visibleProducts() {
+    var products = (state.report && state.report.products) || [];
+    var q = state.query.trim().toLowerCase();
+    return products.map(function (p, i) { return { p: p, i: i }; }).filter(function (row) {
+      var decision = normDecision(verdictOf(row.p).decision);
+      if (state.decision !== "all" && decision !== state.decision) return false;
+      if (!q) return true;
+      return skuOf(row.p).toLowerCase().indexOf(q) !== -1;
+    });
+  }
+
+  function renderMix(summary) {
+    var a = numOrNull(summary.aprobar);
+    var b = numOrNull(summary.corregir);
+    var c = numOrNull(summary.descartar);
+    clear(mix);
+    if (a == null || b == null || c == null || (a + b + c) <= 0) {
+      mix.hidden = true;
+      return;
+    }
+    var total = a + b + c;
+    mix.hidden = false;
+    [["seg-ok", a], ["seg-fix", b], ["seg-drop", c]].forEach(function (pair) {
+      var span = el("span", { class: pair[0] });
+      span.style.flex = "0 0 " + ((pair[1] / total) * 100).toFixed(2) + "%";
+      mix.append(span);
+    });
+  }
+
+  function renderSummary() {
+    var s = state.report.summary || {};
+    clear(counters);
+    [
+      ["ok", "aprobar", fmtInt(s.aprobar)],
+      ["fix", "corregir", fmtInt(s.corregir)],
+      ["drop", "descartar", fmtInt(s.descartar)],
+      ["ink", "Puntuación media", fmtScore(s.avg_score)],
+      ["ink", "WAPE mediano", fmtMedian(s.median_wape)]
+    ].forEach(function (item) {
+      var box = el("div", { class: "counter " + item[0] });
+      box.append(el("span", { class: "n", text: item[2] }));
+      box.append(el("span", { class: "l", text: item[1] }));
+      counters.append(box);
+    });
+    renderMix(s);
+    totals.textContent = "Productos " + fmtInt(s.products) + " · Filas " + fmtInt(s.rows) + " · Peor caso " + fmtWorst(s.worst);
+  }
+
+  function renderMeta() {
+    var r = state.report;
+    var bits = [];
+    if (r.source_name) bits.push(String(r.source_name));
+    var freq = fmtFreq(r.frequency);
+    if (freq !== "—") bits.push("Frecuencia " + freq);
+    if (r.generated_at) bits.push("Generado " + fmtStamp(r.generated_at));
+    metaEl.textContent = bits.join(" · ") || "Informe sin metadatos de origen.";
+    document.title = r.source_name ? ("Auditor de pronósticos · " + r.source_name) : "Auditor de pronósticos";
+  }
+
+  function renderWarnings() {
+    clear(warnings);
+    var items = asTextList(state.report.load_warnings);
+    if (!items.length) {
+      warnings.append(el("p", { class: "quiet-line", text: "Sin avisos de carga." }));
+      return;
+    }
+    var box = el("div", { class: "warnings" });
+    var ul = el("ul");
+    items.forEach(function (t) { ul.append(el("li", { text: t })); });
+    box.append(el("p", { class: "block-label", text: "Avisos de carga" }), ul);
+    warnings.append(box);
+  }
+
+  function renderAdvice() {
+    clear(advice);
+    var items = asTextList(state.report.portfolio_advice);
+    if (!items.length) {
+      advice.append(el("p", { text: "Sin consejo de cartera." }));
+      return;
+    }
+    var ul = el("ul", { class: "advice" });
+    items.forEach(function (t) { ul.append(el("li", { text: t })); });
+    advice.append(ul);
+  }
+
+  function buildRow(p, i) {
+    var cells = rowCells(p);
+    var tr = el("tr", { attrs: { "data-i": String(i) } });
+    if (state.selected === i) tr.className = "is-selected";
+    var th = el("th", { class: "sku", attrs: { scope: "row" } });
+    var open = state.selected === i;
+    th.append(el("button", {
+      class: "as-text",
+      text: cells[0],
+      attrs: {
+        type: "button",
+        "aria-expanded": open ? "true" : "false",
+        "aria-controls": "ficha",
+        "aria-label": (open ? "Cerrar ficha de " : "Abrir ficha de ") + cells[0]
+      }
+    }));
+    tr.append(th);
+    var classes = [null, null, null, "nowrap", "num nowrap", null, "num nowrap", "num nowrap", null];
+    for (var c = 1; c < cells.length; c += 1) {
+      var td = el("td", { text: cells[c], class: classes[c] || "" });
+      if (c === 3 && cells[c] !== "—") {
+        td.textContent = "";
+        td.append(el("span", { class: tagClass(cells[c]), text: cells[c] }));
+      }
+      tr.append(td);
+    }
+    return tr;
+  }
+
+  function renderTable() {
+    var all = (state.report && Array.isArray(state.report.products)) ? state.report.products : [];
+    var rows = visibleProducts();
+    matchEl.textContent = rows.length.toLocaleString("es-ES") + " de " + all.length.toLocaleString("es-ES") + " productos";
+    clear(tbody);
+    if (!rows.length) {
+      var tr = document.createElement("tr");
+      tr.append(el("td", {
+        class: "empty-cell",
+        text: all.length ? "Ningún producto coincide con el filtro." : "El informe no contiene productos.",
+        attrs: { colspan: "9" }
+      }));
+      tbody.append(tr);
+      return;
+    }
+    var frag = document.createDocumentFragment();
+    rows.forEach(function (row) { frag.append(buildRow(row.p, row.i)); });
+    tbody.append(frag);
+  }
+
+  function appendBlock(parent, label, value) {
+    var items = asTextList(value);
+    if (!items.length) return;
+    parent.append(el("p", { class: "block-label", text: label }));
+    if (items.length === 1) {
+      parent.append(el("p", { text: items[0] }));
+      return;
+    }
+    var ul = el("ul");
+    items.forEach(function (t) { ul.append(el("li", { text: t })); });
+    parent.append(ul);
+  }
+
+  function renderVerdict(product, parent) {
+    var v = verdictOf(product);
+    var decision = normDecision(v.decision);
+    var row = el("p", { class: "verdict-line" });
+    row.append(decision ? el("span", { class: tagClass(decision), text: decision }) : el("span", { text: "—" }));
+    row.append(el("span", { class: "score-line", text: "Puntuación " + fmtScore(v.score) }));
+    parent.append(row);
+    var reasons = asTextList(v.reasons);
+    if (!reasons.length) {
+      parent.append(el("p", { text: "Sin motivos registrados." }));
+      return;
+    }
+    var ul = el("ul", { class: "reasons" });
+    reasons.forEach(function (t) { ul.append(el("li", { text: t })); });
+    parent.append(ul);
+  }
+
+  function sevInfo(raw) {
+    var x = String(raw == null ? "" : raw).trim().toLowerCase();
+    var map = {
+      critical: "crítica", critica: "crítica", alta: "alta", high: "alta", error: "error", grave: "grave",
+      warning: "aviso", aviso: "aviso", media: "media", medium: "media", moderate: "media", moderada: "media", warn: "aviso",
+      info: "info", baja: "baja", low: "baja", note: "nota", nota: "nota", ok: "ok"
+    };
+    var high = { critical: 1, critica: 1, alta: 1, high: 1, error: 1, grave: 1 };
+    var low = { info: 1, baja: 1, low: 1, note: 1, nota: 1, ok: 1 };
+    if (!x) return { cls: "mid", label: "media" };
+    if (high[x]) return { cls: "high", label: map[x] || "alta" };
+    if (low[x]) return { cls: "low", label: map[x] || "baja" };
+    if (map[x]) return { cls: "mid", label: map[x] };
+    return { cls: "mid", label: String(raw) };
+  }
+
+  function renderFindings(list, parent) {
+    var items = Array.isArray(list) ? list : [];
+    if (!items.length) {
+      parent.append(el("p", { text: "Sin hallazgos." }));
+      return;
+    }
+    items.forEach(function (f) {
+      var sev = sevInfo(f && f.severity);
+      var art = el("article", { class: "finding " + sev.cls });
+      var header = el("header");
+      header.append(el("span", { class: "sev", text: sev.label }));
+      if (f && f.id != null && f.id !== "") header.append(el("span", { class: "fid", text: String(f.id) }));
+      header.append(el("strong", { text: (f && f.title) ? String(f.title) : "Hallazgo" }));
+      art.append(header);
+      if (f && f.detail) art.append(el("p", { text: String(f.detail) }));
+      appendBlock(art, "Sugerencia", f && f.suggestion);
+      appendBlock(art, "Acción", f && f.action);
+      parent.append(art);
+    });
+  }
+
+  function profileLabel(key) {
+    var k = String(key);
+    if (PROFILE_LABELS[k]) return PROFILE_LABELS[k];
+    if (PROFILE_LABELS[k.toLowerCase()]) return PROFILE_LABELS[k.toLowerCase()];
+    return k.replace(/_/g, " ");
+  }
+
+  function formatProfileValue(key, value) {
+    if (value == null || value === "") return "—";
+    if (typeof value === "boolean") return value ? "sí" : "no";
+    if (Array.isArray(value)) {
+      var simple = value.every(function (x) {
+        return x == null || typeof x === "string" || typeof x === "number" || typeof x === "boolean";
+      });
+      if (!simple) return null;
+      if (!value.length) return "—";
+      return value.map(function (x) { return (x == null || x === "") ? "—" : String(x); }).join(", ");
+    }
+    if (typeof value === "object") {
+      if ("value" in value || "val" in value) {
+        return formatProfileValue(key, value.value != null ? value.value : value.val);
+      }
+      return null;
+    }
+    if (String(key).toLowerCase() === "trend_direction") {
+      var trend = { up: "al alza", down: "a la baja", flat: "plana", unknown: "desconocida" };
+      return trend[String(value).toLowerCase()] || String(value);
+    }
+    if (looksLikeDate(value)) return fmtDay(value);
+    if (isClassKey(key)) return translateClass(value);
+    var metric = null;
+    var keyName = String(key).toLowerCase();
+    for (var i = 0; i < METRICS.length; i += 1) {
+      if (METRICS[i].keys.some(function (k) { return k.toLowerCase() === keyName; })) {
+        metric = METRICS[i];
+        break;
+      }
+    }
+    if (Number.isFinite(Number(value)) && (typeof value === "number" || /^-?\d+(\.\d+)?$/.test(String(value).trim()))) {
+      var kind = metric ? metric.kind : ((RATIO_PERCENT[keyName] || ALREADY_PERCENT[keyName]) ? "pct" : "num");
+      return formatByKind(kind, value, null, key);
+    }
+    if (typeof value === "number") return fmtQty(value);
+    if (typeof value === "string" && /^-?\d+(\.\d+)?$/.test(value.trim())) return fmtQty(Number(value));
+    return String(value);
+  }
+
+  function renderProfile(product, parent) {
+    var profile = product.profile;
+    var cls = demandClass(product);
+    var dl = el("dl", { class: "stats" });
+    dl.append(el("dt", { text: "Clase de demanda" }));
+    dl.append(el("dd", { text: cls }));
+    if (profile && typeof profile === "object" && !Array.isArray(profile)) {
+      Object.keys(profile).forEach(function (key) {
+        if (isClassKey(key)) return;
+        var formatted = formatProfileValue(key, profile[key]);
+        if (formatted == null) return;
+        dl.append(el("dt", { text: profileLabel(key) }));
+        dl.append(el("dd", { text: formatted }));
+      });
+    }
+    parent.append(dl);
+    if (profile == null || profile === "") parent.append(el("p", { text: "Sin otras estadísticas de perfil." }));
+    else if (typeof profile === "string") parent.append(el("p", { text: "El perfil llega como clase, sin más estadísticas." }));
+  }
+
+  function renderGlossary(product, parent) {
+    var present = METRICS.map(function (m) { return { m: m, hit: lookupMetric(product, m) }; }).filter(function (x) {
+      return x.hit.present;
+    });
+    if (!present.length) {
+      parent.append(el("p", { text: "Este producto no trae métricas para glosar." }));
+      return;
+    }
+    var dl = el("dl", { class: "gloss" });
+    present.forEach(function (x) {
+      var dt = el("dt");
+      dt.append(el("span", { text: x.m.label }));
+      dt.append(el("span", { class: "num", text: formatByKind(x.m.kind, x.hit.value, x.hit.unit, x.hit.key) }));
+      dl.append(dt);
+      dl.append(el("dd", { text: x.m.text }));
+    });
+    parent.append(dl);
+  }
+
+  function renderRecs(list, parent) {
+    var recs = Array.isArray(list) ? list.filter(Boolean).slice() : [];
+    recs.sort(function (a, b) {
+      var ra = Number(a.rank);
+      var rb = Number(b.rank);
+      if (Number.isFinite(ra) && Number.isFinite(rb)) return ra - rb;
+      if (Number.isFinite(ra)) return -1;
+      if (Number.isFinite(rb)) return 1;
+      return 0;
+    });
+    if (!recs.length) {
+      parent.append(el("p", { text: "Sin modelo alternativo sugerido." }));
+      return;
+    }
+    recs.forEach(function (rec) {
+      var card = el("article", { class: "rec" });
+      var head = el("header", { class: "rec-head" });
+      head.append(el("span", { class: "rank", text: rec.rank != null ? String(rec.rank) : "·" }));
+      var title = rec.alias || rec.model || "Modelo";
+      head.append(el("strong", { text: String(title) }));
+      var fit = fmtFit(rec.fit);
+      if (fit) head.append(el("span", { class: "fit", text: "Ajuste " + fit }));
+      card.append(head);
+      var metaBits = [];
+      if (rec.model && String(rec.model) !== String(title)) metaBits.push("Modelo " + rec.model);
+      if (rec.family) metaBits.push("Familia " + rec.family);
+      if (rec.library) metaBits.push("Biblioteca " + rec.library);
+      if (metaBits.length) card.append(el("p", { class: "rec-meta", text: metaBits.join(" · ") }));
+      appendBlock(card, "Por qué", rec.why);
+      appendBlock(card, "Evitar cuando", rec.avoid_when);
+      appendBlock(card, "Qué mejora", rec.improves);
+      parent.append(card);
+    });
+  }
+
+  function renderImprove(list, parent) {
+    var items = asTextList(list);
+    if (!items.length) {
+      parent.append(el("p", { text: "Sin pautas de mejora." }));
+      return;
+    }
+    var ol = el("ol", { class: "improve" });
+    items.forEach(function (t) { ol.append(el("li", { text: t })); });
+    parent.append(ol);
+  }
+
+  function renderChangedPoints(parent, points) {
+    if (points == null || points === "") return;
+    if (typeof points === "number") {
+      parent.append(el("p", { text: "Puntos modificados: " + fmtInt(points) }));
+      return;
+    }
+    if (typeof points === "string") {
+      parent.append(el("p", { text: "Puntos modificados: " + points }));
+      return;
+    }
+    if (Array.isArray(points)) {
+      parent.append(el("p", { text: "Puntos modificados: " + points.length.toLocaleString("es-ES") }));
+      var rich = points.filter(function (x) { return (x && typeof x === "object") || typeof x === "string"; });
+      if (rich.length && rich.length <= 10) appendBlock(parent, "Detalle de puntos", rich);
+    }
+  }
+
+  function renderPreview(parent, rows) {
+    parent.append(el("p", { class: "block-label", text: "Vista previa de correcciones" }));
+    if (!Array.isArray(rows) || !rows.length) {
+      parent.append(el("p", { text: "Sin vista previa de correcciones." }));
+      return;
+    }
+    var wrap = el("div", { class: "preview-scroll" });
+    var table = el("table");
+    var thead = el("thead");
+    var hr = el("tr");
+    ["Fecha", "Pronóstico", "Corregido", "Nota"].forEach(function (name, idx) {
+      hr.append(el("th", {
+        text: name,
+        class: idx === 1 || idx === 2 ? "num" : "",
+        attrs: { scope: "col" }
+      }));
+    });
+    thead.append(hr);
+    var tb = el("tbody");
+    rows.forEach(function (row) {
+      var tr = el("tr");
+      var a = row ? row.forecast : null;
+      var b = row ? row.forecast_corrected : null;
+      if (a != null && b != null && String(a) !== String(b)) tr.className = "changed";
+      tr.append(el("td", { class: "nowrap", text: fmtDay(row && row.date) }));
+      tr.append(el("td", { class: "num", text: fmtQty(a) }));
+      tr.append(el("td", { class: "num corr", text: fmtQty(b) }));
+      tr.append(el("td", { text: (row && row.correction_note) ? String(row.correction_note) : "—" }));
+      tb.append(tr);
+    });
+    table.append(thead, tb);
+    wrap.append(table);
+    table.setAttribute("aria-label", "Vista previa de correcciones");
+    parent.append(wrap);
+  }
+
+  function renderCorrection(product, parent) {
+    var c = (product.correction && typeof product.correction === "object") ? product.correction : null;
+    if (!c) parent.append(el("p", { text: "Sin plan de corrección." }));
+    else {
+      appendBlock(parent, "Método", c.method_summary);
+      appendBlock(parent, "Acciones", c.actions);
+      renderChangedPoints(parent, c.changed_points);
+    }
+    renderPreview(parent, product.corrections_preview);
+  }
+
+  function addSection(parent, title, fill) {
+    var sec = el("section", { class: "block" });
+    sec.append(el("h4", { text: title }));
+    fill(sec);
+    parent.append(sec);
+  }
+
+  function renderFicha() {
+    clear(ficha);
+    var i = state.selected;
+    var product = state.report && state.report.products && state.report.products[i];
+    if (!product) {
+      ficha.hidden = true;
+      workbench.classList.add("solo");
+      return;
+    }
+    var head = el("div", { class: "ficha-top" });
+    var titles = el("div");
+    titles.append(el("p", { class: "kicker", text: "04 · Ficha · Escape cierra" }));
+    titles.append(el("h3", { attrs: { id: "ficha-titulo" }, text: skuOf(product) || "Producto" }));
+    var name = product.product_name || product.name;
+    if (name) titles.append(el("p", { class: "fname", text: String(name) }));
+    var bits = [];
+    if (product.location) bits.push(String(product.location));
+    if (product.category) bits.push(String(product.category));
+    if (product.model_name) bits.push("Modelo evaluado: " + product.model_name);
+    if (bits.length) titles.append(el("p", { class: "fmeta", text: bits.join(" · ") }));
+    var closeBtn = el("button", { class: "ghost", text: "Cerrar ficha", attrs: { type: "button" } });
+    closeBtn.addEventListener("click", closeFicha);
+    head.append(titles, closeBtn);
+    ficha.append(head);
+    ficha.setAttribute("aria-labelledby", "ficha-titulo");
+    addSection(ficha, "Veredicto", function (node) { renderVerdict(product, node); });
+    addSection(ficha, "Hallazgos", function (node) { renderFindings(product.findings, node); });
+    addSection(ficha, "Perfil", function (node) { renderProfile(product, node); });
+    addSection(ficha, "Métricas", function (node) { renderGlossary(product, node); });
+    addSection(ficha, "Recomendaciones", function (node) { renderRecs(product.recommendations, node); });
+    addSection(ficha, "Cómo mejorar", function (node) { renderImprove(product.how_to_improve, node); });
+    addSection(ficha, "Corrección", function (node) { renderCorrection(product, node); });
+  }
+
+  function renderAll() {
+    vacio.hidden = true;
+    resultado.hidden = false;
+    sampleNote.hidden = !state.sample;
+    state.selected = null;
+    ficha.hidden = true;
+    workbench.classList.add("solo");
+    clear(ficha);
+    renderMeta();
+    renderSummary();
+    renderWarnings();
+    renderAdvice();
+    renderTable();
+    var n = (state.report.products || []).length;
+    setStatus((state.sample ? "Ejemplo cargado · " : "Informe listo · ") + n.toLocaleString("es-ES") + " productos.");
+    var heading = document.getElementById("titulo-resumen");
+    if (heading) heading.focus();
+  }
+
+  function openFicha(i) {
+    var product = state.report && state.report.products && state.report.products[i];
+    if (!product) return;
+    state.selected = i;
+    renderTable();
+    renderFicha();
+    ficha.hidden = false;
+    workbench.classList.remove("solo");
+    ficha.focus();
+    if (window.matchMedia("(max-width: 960px)").matches) {
+      ficha.scrollIntoView({ behavior: motion(), block: "start" });
+    }
+  }
+
+  function closeFicha() {
+    var i = state.selected;
+    state.selected = null;
+    renderTable();
+    var btn = Number.isInteger(i) ? document.querySelector('#productos tr[data-i="' + i + '"] button') : null;
+    if (btn) btn.focus();
+    ficha.hidden = true;
+    workbench.classList.add("solo");
+    clear(ficha);
+  }
+
+  function toggle(i) {
+    if (state.selected === i) closeFicha();
+    else openFicha(i);
+  }
+
+  function assertReport(data) {
+    if (!data || typeof data !== "object" || Array.isArray(data)) {
+      throw new Error("La respuesta no es un informe JSON válido.");
+    }
+    var looks = ("summary" in data) || ("products" in data) || ("source_name" in data) || ("portfolio_advice" in data);
+    if (!looks) {
+      var msg = data.message || data.error || data.detail;
+      if (typeof msg === "string" && msg.trim()) throw new Error(msg.trim());
+      throw new Error("La respuesta no trae un informe reconocible.");
+    }
+    if (!Array.isArray(data.products)) data.products = [];
+    return data;
+  }
+
+  function applyReport(report, sample) {
+    state.report = report;
+    state.sample = !!sample;
+    state.scoreScale = detectScoreScale(report);
+    state.decision = "all";
+    state.query = "";
+    state.selected = null;
+    filtroDecision.value = "all";
+    filtroSku.value = "";
+    renderAll();
+  }
+
+  function messageFrom(text, status) {
+    var raw = (text || "").trim();
+    if (/<!doctype|<html/i.test(raw)) raw = raw.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+    if (!raw) return "El auditor respondió con un error (HTTP " + status + ").";
+    try {
+      var j = JSON.parse(raw);
+      var m = j && (j.message || j.error || j.detail);
+      if (typeof m === "string" && m.trim()) return m.trim();
+      if (m && typeof m === "object") return JSON.stringify(m).slice(0, 500);
+    } catch (err) { /* texto plano */ }
+    return raw.slice(0, 500);
+  }
+
+  function humanError(err) {
+    if (err && err.name === "AbortError") return "La solicitud tardó demasiado y se canceló.";
+    if (err instanceof TypeError && /fetch|network|load/i.test(String(err.message))) {
+      return "No se pudo contactar el auditor. Compruebe que el servicio responde en este mismo origen.";
+    }
+    return (err && err.message) ? err.message : "No se pudo completar la operación.";
+  }
+
+  function currentSeries() {
+    if (state.file) return { kind: "file", file: state.file };
+    if (pasteEl.value.trim()) return { kind: "text", text: pasteEl.value };
+    return null;
+  }
+
+  function seriesToForm(series) {
+    var fd = new FormData();
+    if (series.kind === "file") fd.append("file", series.file, series.file.name || "serie.csv");
+    else fd.append("file", new Blob([series.text], { type: "text/csv;charset=utf-8" }), "serie_pegada.csv");
+    return fd;
+  }
+
+  function saveBlob(blob, name) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = name || "descarga.csv";
+    a.rel = "noopener";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+  }
+
+  function nameFromDisposition(res, fallback) {
+    var cd = res.headers.get("Content-Disposition") || "";
+    var star = /filename\*=(?:UTF-8''|utf-8'')([^;]+)/i.exec(cd);
+    if (star) {
+      try { return decodeURIComponent(star[1].trim().replace(/^"|"$/g, "")); } catch (err) { /* sigue */ }
+    }
+    var plain = /filename="?([^";]+)"?/i.exec(cd);
+    if (plain) return plain[1];
+    return fallback;
+  }
+
+  async function fetchCsv(url, options, fallbackName) {
+    var res = await fetch(url, options);
+    var ct = (res.headers.get("content-type") || "").toLowerCase();
+    if (!res.ok || ct.indexOf("json") !== -1) {
+      var text = await res.text();
+      var msg = messageFrom(text, res.status);
+      throw new Error(!res.ok ? msg : (msg || "El servidor no devolvió un CSV."));
+    }
+    var blob = await res.blob();
+    if (!blob.size) throw new Error("El servidor devolvió un archivo vacío.");
+    saveBlob(blob, nameFromDisposition(res, fallbackName));
+  }
+
+  async function run(pendingLabel, fn) {
+    if (busy) return;
+    busy = true;
+    document.body.dataset.busy = "1";
+    mainEl.setAttribute("aria-busy", "true");
+    var ac = new AbortController();
+    var timer = setTimeout(function () { ac.abort(); }, 90000);
+    setStatus(pendingLabel);
+    try {
+      await fn(ac.signal);
+    } catch (err) {
+      showError(humanError(err));
+    } finally {
+      clearTimeout(timer);
+      busy = false;
+      document.body.dataset.busy = "";
+      mainEl.setAttribute("aria-busy", "false");
+    }
+  }
+
+  async function onAnalyze(signal) {
+    var series = currentSeries();
+    if (!series) throw new Error("Seleccione un archivo CSV o pegue la serie en el recuadro.");
+    var res;
+    if (series.kind === "file") {
+      res = await fetch("/api/analyze", { method: "POST", body: seriesToForm(series), signal: signal });
+    } else {
+      res = await fetch("/api/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "text/plain; charset=utf-8" },
+        body: series.text,
+        signal: signal
+      });
+    }
+    var text = await res.text();
+    if (!res.ok) throw new Error(messageFrom(text, res.status));
+    var data;
+    try { data = JSON.parse(text); }
+    catch (err) { throw new Error("La respuesta no es un informe JSON válido."); }
+    applyReport(assertReport(data), false);
+  }
+
+  function fileSize(file) {
+    var kb = file.size / 1024;
+    if (kb < 1024) return kb.toLocaleString("es-ES", { maximumFractionDigits: 1 }) + " KB";
+    return (kb / 1024).toLocaleString("es-ES", { maximumFractionDigits: 1 }) + " MB";
+  }
+
+  function refreshHint() {
+    var series = currentSeries();
+    if (!series) {
+      hint.textContent = "Ninguna serie lista.";
+      return;
+    }
+    if (series.kind === "file") hint.textContent = "Listo para enviar «" + series.file.name + "».";
+    else hint.textContent = "Listo para enviar el texto pegado.";
+  }
+
+  function refreshFileUi() {
+    if (state.file) {
+      dropKicker.textContent = "Archivo listo";
+      dropText.textContent = state.file.name;
+      fileNameEl.textContent = state.file.name + " · " + fileSize(state.file);
+      btnQuitar.hidden = false;
+    } else {
+      dropKicker.textContent = "Soltar CSV";
+      dropText.textContent = "Arrastre un archivo aquí o use el selector.";
+      fileNameEl.textContent = "Ningún archivo seleccionado";
+      btnQuitar.hidden = true;
+    }
+    refreshHint();
+  }
+
+  function assignFile(file) {
+    if (!file) return;
+    try {
+      var dt = new DataTransfer();
+      dt.items.add(file);
+      fileInput.files = dt.files;
+    } catch (err) { /* el estado local conserva el archivo */ }
+    state.file = file;
+    refreshFileUi();
+  }
+
+  function csvField(value) {
+    var s = value == null ? "" : String(value);
+    if (/[";\n\r]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+    return s;
+  }
+
+  function downloadVisibleCsv() {
+    var rows = visibleProducts();
+    if (!rows.length) {
+      showError("No hay filas visibles para exportar.");
+      return;
+    }
+    var header = ["SKU", "Nombre", "Ubicación", "Decisión", "Puntuación", "Clase de demanda", "WAPE", "Sesgo", "Modelo sugerido"];
+    var lines = [header.map(csvField).join(";")];
+    rows.forEach(function (row) {
+      lines.push(rowCells(row.p).map(csvField).join(";"));
+    });
+    var blob = new Blob(["\uFEFF" + lines.join("\r\n")], { type: "text/csv;charset=utf-8" });
+    saveBlob(blob, "auditoria_productos.csv");
+    setStatus("Tabla descargada · " + rows.length.toLocaleString("es-ES") + " filas.");
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    run("Analizando…", onAnalyze);
+  });
+
+  document.getElementById("btn-plantilla").addEventListener("click", function () {
+    run("Descargando plantilla…", async function (signal) {
+      await fetchCsv("/api/template", { method: "GET", signal: signal }, "plantilla_pronosticos.csv");
+      setStatus("Plantilla descargada.");
+    });
+  });
+
+  document.getElementById("btn-corregida").addEventListener("click", function () {
+    run("Preparando la serie corregida…", async function (signal) {
+      var series = currentSeries();
+      if (!series) throw new Error("No hay serie cargada para corregir. Elija un archivo o pegue el CSV.");
+      await fetchCsv("/api/corrected", { method: "POST", body: seriesToForm(series), signal: signal }, "serie_corregida.csv");
+      setStatus("Serie corregida descargada.");
+    });
+  });
+
+  document.getElementById("btn-ejemplo").addEventListener("click", function () {
+    run("Cargando ejemplo…", async function (signal) {
+      var res = await fetch("/api/sample-report", { signal: signal });
+      var text = await res.text();
+      if (!res.ok) throw new Error(messageFrom(text, res.status));
+      var data;
+      try { data = JSON.parse(text); }
+      catch (err) { throw new Error("El ejemplo no es un JSON válido."); }
+      applyReport(assertReport(data), true);
+    });
+  });
+
+  document.getElementById("btn-csv").addEventListener("click", downloadVisibleCsv);
+
+  fileInput.addEventListener("change", function () {
+    state.file = (fileInput.files && fileInput.files[0]) || null;
+    refreshFileUi();
+  });
+  fileInput.addEventListener("focus", function () { drop.classList.add("focus"); });
+  fileInput.addEventListener("blur", function () { drop.classList.remove("focus"); });
+
+  btnQuitar.addEventListener("click", function () {
+    state.file = null;
+    fileInput.value = "";
+    refreshFileUi();
+  });
+
+  function openPicker() { fileInput.click(); }
+  var ignoreClick = false;
+  drop.addEventListener("click", function () {
+    if (ignoreClick) { ignoreClick = false; return; }
+    openPicker();
+  });
+  drop.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      openPicker();
+    }
+  });
+
+  pasteEl.addEventListener("input", refreshHint);
+  pasteEl.addEventListener("keydown", function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+      e.preventDefault();
+      if (typeof form.requestSubmit === "function") form.requestSubmit();
+      else form.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
+    }
+  });
+
+  drop.addEventListener("dragenter", function (e) {
+    e.preventDefault();
+    dragDepth += 1;
+    drop.classList.add("drag");
+  });
+  drop.addEventListener("dragover", function (e) { e.preventDefault(); });
+  drop.addEventListener("dragleave", function () {
+    dragDepth -= 1;
+    if (dragDepth <= 0) {
+      dragDepth = 0;
+      drop.classList.remove("drag");
+    }
+  });
+  drop.addEventListener("drop", function (e) {
+    e.preventDefault();
+    ignoreClick = true;
+    dragDepth = 0;
+    drop.classList.remove("drag");
+    var files = e.dataTransfer && e.dataTransfer.files;
+    if (!files || !files.length) return;
+    assignFile(files[0]);
+    if (files.length > 1) setStatus("Hay varios archivos. Se usará solo el primero.");
+  });
+
+  window.addEventListener("dragover", function (e) { e.preventDefault(); });
+  window.addEventListener("drop", function (e) { e.preventDefault(); });
+
+  filtroDecision.addEventListener("change", function () {
+    state.decision = filtroDecision.value;
+    renderTable();
+  });
+  filtroSku.addEventListener("input", function () {
+    state.query = filtroSku.value;
+    renderTable();
+  });
+
+  tbody.addEventListener("click", function (e) {
+    var tr = e.target.closest("tr[data-i]");
+    if (!tr || !tbody.contains(tr)) return;
+    var i = Number(tr.getAttribute("data-i"));
+    if (!Number.isInteger(i)) return;
+    toggle(i);
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && state.selected != null && !ficha.hidden) {
+      e.preventDefault();
+      closeFicha();
+    }
+  });
+
+  refreshFileUi();
+})();
+</script>
+</body>
+</html>

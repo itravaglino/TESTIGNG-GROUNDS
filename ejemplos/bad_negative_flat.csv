@@ -1,0 +1,13 @@
+sku,descripcion,sucursal,fecha,pronostico,venta
+BADFLAT,Pronóstico negativo plano,SUR,2024-01-01,-5.00,110.00
+BADFLAT,Pronóstico negativo plano,SUR,2024-02-01,-5.00,125.00
+BADFLAT,Pronóstico negativo plano,SUR,2024-03-01,-5.00,135.98
+BADFLAT,Pronóstico negativo plano,SUR,2024-04-01,-5.00,140.00
+BADFLAT,Pronóstico negativo plano,SUR,2024-05-01,-5.00,135.98
+BADFLAT,Pronóstico negativo plano,SUR,2024-06-01,-5.00,125.00
+BADFLAT,Pronóstico negativo plano,SUR,2024-07-01,-5.00,110.00
+BADFLAT,Pronóstico negativo plano,SUR,2024-08-01,-5.00,95.00
+BADFLAT,Pronóstico negativo plano,SUR,2024-09-01,-5.00,84.02
+BADFLAT,Pronóstico negativo plano,SUR,2024-10-01,-5.00,80.00
+BADFLAT,Pronóstico negativo plano,SUR,2024-11-01,-5.00,84.02
+BADFLAT,Pronóstico negativo plano,SUR,2024-12-01,-5.00,95.00

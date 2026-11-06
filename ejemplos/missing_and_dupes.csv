@@ -1,0 +1,8 @@
+sku,descripcion,sucursal,fecha,pronostico,venta
+MISS01,Hueco y duplicado,CENTRO,2024-01-01,100.00,98.00
+MISS01,Hueco y duplicado,CENTRO,2024-02-01,104.00,101.00
+MISS01,Hueco y duplicado,CENTRO,2024-04-01,90.00,110.00
+MISS01,Hueco y duplicado,CENTRO,2024-04-01,140.00,110.00
+MISS01,Hueco y duplicado,CENTRO,2024-05-01,108.00,106.00
+MISS01,Hueco y duplicado,CENTRO,2024-06-01,112.00,109.00
+MISS01,Hueco y duplicado,CENTRO,2024-07-01,116.00,114.00

@@ -1,0 +1,145 @@
+sku,descripcion,sucursal,fecha,pronostico,venta
+P01-SEAS,Portfolio estacional,CENTRO,2023-01-01,100.00,100.00
+P01-SEAS,Portfolio estacional,CENTRO,2023-02-01,100.00,115.00
+P01-SEAS,Portfolio estacional,CENTRO,2023-03-01,100.00,125.98
+P01-SEAS,Portfolio estacional,CENTRO,2023-04-01,100.00,130.00
+P01-SEAS,Portfolio estacional,CENTRO,2023-05-01,100.00,125.98
+P01-SEAS,Portfolio estacional,CENTRO,2023-06-01,100.00,115.00
+P01-SEAS,Portfolio estacional,CENTRO,2023-07-01,100.00,100.00
+P01-SEAS,Portfolio estacional,CENTRO,2023-08-01,100.00,85.00
+P01-SEAS,Portfolio estacional,CENTRO,2023-09-01,100.00,74.02
+P01-SEAS,Portfolio estacional,CENTRO,2023-10-01,100.00,70.00
+P01-SEAS,Portfolio estacional,CENTRO,2023-11-01,100.00,74.02
+P01-SEAS,Portfolio estacional,CENTRO,2023-12-01,100.00,85.00
+P01-SEAS,Portfolio estacional,CENTRO,2024-01-01,100.00,100.00
+P01-SEAS,Portfolio estacional,CENTRO,2024-02-01,115.00,115.00
+P01-SEAS,Portfolio estacional,CENTRO,2024-03-01,125.98,125.98
+P01-SEAS,Portfolio estacional,CENTRO,2024-04-01,130.00,130.00
+P01-SEAS,Portfolio estacional,CENTRO,2024-05-01,125.98,125.98
+P01-SEAS,Portfolio estacional,CENTRO,2024-06-01,115.00,115.00
+P02-STABLE,Portfolio estable,NORTE,2023-01-01,200.00,200.00
+P02-STABLE,Portfolio estable,NORTE,2023-02-01,200.00,202.00
+P02-STABLE,Portfolio estable,NORTE,2023-03-01,200.00,199.00
+P02-STABLE,Portfolio estable,NORTE,2023-04-01,200.00,203.00
+P02-STABLE,Portfolio estable,NORTE,2023-05-01,200.00,198.00
+P02-STABLE,Portfolio estable,NORTE,2023-06-01,200.00,201.00
+P02-STABLE,Portfolio estable,NORTE,2023-07-01,200.00,197.00
+P02-STABLE,Portfolio estable,NORTE,2023-08-01,200.00,202.00
+P02-STABLE,Portfolio estable,NORTE,2023-09-01,200.00,200.00
+P02-STABLE,Portfolio estable,NORTE,2023-10-01,200.00,204.00
+P02-STABLE,Portfolio estable,NORTE,2023-11-01,200.00,198.00
+P02-STABLE,Portfolio estable,NORTE,2023-12-01,200.00,201.00
+P02-STABLE,Portfolio estable,NORTE,2024-01-01,200.00,203.00
+P02-STABLE,Portfolio estable,NORTE,2024-02-01,200.00,199.00
+P02-STABLE,Portfolio estable,NORTE,2024-03-01,200.00,202.00
+P02-STABLE,Portfolio estable,NORTE,2024-04-01,200.00,196.00
+P02-STABLE,Portfolio estable,NORTE,2024-05-01,200.00,201.00
+P02-STABLE,Portfolio estable,NORTE,2024-06-01,200.00,200.00
+P03-NEG,Pronóstico negativo plano,SUR,2023-01-01,-5.00,80.00
+P03-NEG,Pronóstico negativo plano,SUR,2023-02-01,-5.00,90.00
+P03-NEG,Pronóstico negativo plano,SUR,2023-03-01,-5.00,100.00
+P03-NEG,Pronóstico negativo plano,SUR,2023-04-01,-5.00,110.00
+P03-NEG,Pronóstico negativo plano,SUR,2023-05-01,-5.00,120.00
+P03-NEG,Pronóstico negativo plano,SUR,2023-06-01,-5.00,130.00
+P03-NEG,Pronóstico negativo plano,SUR,2023-07-01,-5.00,140.00
+P03-NEG,Pronóstico negativo plano,SUR,2023-08-01,-5.00,80.00
+P03-NEG,Pronóstico negativo plano,SUR,2023-09-01,-5.00,90.00
+P03-NEG,Pronóstico negativo plano,SUR,2023-10-01,-5.00,100.00
+P03-NEG,Pronóstico negativo plano,SUR,2023-11-01,-5.00,110.00
+P03-NEG,Pronóstico negativo plano,SUR,2023-12-01,-5.00,120.00
+P03-NEG,Pronóstico negativo plano,SUR,2024-01-01,-5.00,130.00
+P03-NEG,Pronóstico negativo plano,SUR,2024-02-01,-5.00,140.00
+P03-NEG,Pronóstico negativo plano,SUR,2024-03-01,-5.00,80.00
+P03-NEG,Pronóstico negativo plano,SUR,2024-04-01,-5.00,90.00
+P03-NEG,Pronóstico negativo plano,SUR,2024-05-01,-5.00,100.00
+P03-NEG,Pronóstico negativo plano,SUR,2024-06-01,-5.00,110.00
+P04-SPIKE,Explosión en el cierre,CENTRO,2023-01-01,50.00,48.00
+P04-SPIKE,Explosión en el cierre,CENTRO,2023-02-01,50.00,51.00
+P04-SPIKE,Explosión en el cierre,CENTRO,2023-03-01,50.00,49.00
+P04-SPIKE,Explosión en el cierre,CENTRO,2023-04-01,50.00,53.00
+P04-SPIKE,Explosión en el cierre,CENTRO,2023-05-01,50.00,50.00
+P04-SPIKE,Explosión en el cierre,CENTRO,2023-06-01,50.00,47.00
+P04-SPIKE,Explosión en el cierre,CENTRO,2023-07-01,50.00,52.00
+P04-SPIKE,Explosión en el cierre,CENTRO,2023-08-01,50.00,50.00
+P04-SPIKE,Explosión en el cierre,CENTRO,2023-09-01,50.00,49.00
+P04-SPIKE,Explosión en el cierre,CENTRO,2023-10-01,50.00,51.00
+P04-SPIKE,Explosión en el cierre,CENTRO,2023-11-01,50.00,48.00
+P04-SPIKE,Explosión en el cierre,CENTRO,2023-12-01,50.00,52.00
+P04-SPIKE,Explosión en el cierre,CENTRO,2024-01-01,50.00,50.00
+P04-SPIKE,Explosión en el cierre,CENTRO,2024-02-01,50.00,49.00
+P04-SPIKE,Explosión en el cierre,CENTRO,2024-03-01,50.00,53.00
+P04-SPIKE,Explosión en el cierre,CENTRO,2024-04-01,50.00,47.00
+P04-SPIKE,Explosión en el cierre,CENTRO,2024-05-01,50.00,51.00
+P04-SPIKE,Explosión en el cierre,CENTRO,2024-06-01,5000.00,50.00
+P05-INTER,Demanda intermitente,NORTE,2023-01-01,10.00,0.00
+P05-INTER,Demanda intermitente,NORTE,2023-02-01,10.00,0.00
+P05-INTER,Demanda intermitente,NORTE,2023-03-01,10.00,22.00
+P05-INTER,Demanda intermitente,NORTE,2023-04-01,10.00,0.00
+P05-INTER,Demanda intermitente,NORTE,2023-05-01,10.00,0.00
+P05-INTER,Demanda intermitente,NORTE,2023-06-01,10.00,0.00
+P05-INTER,Demanda intermitente,NORTE,2023-07-01,10.00,0.00
+P05-INTER,Demanda intermitente,NORTE,2023-08-01,10.00,0.00
+P05-INTER,Demanda intermitente,NORTE,2023-09-01,10.00,35.00
+P05-INTER,Demanda intermitente,NORTE,2023-10-01,10.00,0.00
+P05-INTER,Demanda intermitente,NORTE,2023-11-01,10.00,0.00
+P05-INTER,Demanda intermitente,NORTE,2023-12-01,10.00,0.00
+P05-INTER,Demanda intermitente,NORTE,2024-01-01,10.00,0.00
+P05-INTER,Demanda intermitente,NORTE,2024-02-01,10.00,0.00
+P05-INTER,Demanda intermitente,NORTE,2024-03-01,10.00,28.00
+P05-INTER,Demanda intermitente,NORTE,2024-04-01,10.00,0.00
+P05-INTER,Demanda intermitente,NORTE,2024-05-01,10.00,0.00
+P05-INTER,Demanda intermitente,NORTE,2024-06-01,10.00,0.00
+P06-LUMPY,Demanda irregular,SUR,2023-01-01,15.00,0.00
+P06-LUMPY,Demanda irregular,SUR,2023-02-01,15.00,10.00
+P06-LUMPY,Demanda irregular,SUR,2023-03-01,15.00,0.00
+P06-LUMPY,Demanda irregular,SUR,2023-04-01,15.00,0.00
+P06-LUMPY,Demanda irregular,SUR,2023-05-01,15.00,0.00
+P06-LUMPY,Demanda irregular,SUR,2023-06-01,15.00,0.00
+P06-LUMPY,Demanda irregular,SUR,2023-07-01,15.00,80.00
+P06-LUMPY,Demanda irregular,SUR,2023-08-01,15.00,0.00
+P06-LUMPY,Demanda irregular,SUR,2023-09-01,15.00,0.00
+P06-LUMPY,Demanda irregular,SUR,2023-10-01,15.00,0.00
+P06-LUMPY,Demanda irregular,SUR,2023-11-01,15.00,0.00
+P06-LUMPY,Demanda irregular,SUR,2023-12-01,15.00,0.00
+P06-LUMPY,Demanda irregular,SUR,2024-01-01,15.00,12.00
+P06-LUMPY,Demanda irregular,SUR,2024-02-01,15.00,0.00
+P06-LUMPY,Demanda irregular,SUR,2024-03-01,15.00,0.00
+P06-LUMPY,Demanda irregular,SUR,2024-04-01,15.00,0.00
+P06-LUMPY,Demanda irregular,SUR,2024-05-01,15.00,100.00
+P06-LUMPY,Demanda irregular,SUR,2024-06-01,15.00,0.00
+P07-BIAS,Sesgo alto,ESTE,2023-01-01,180.00,100.00
+P07-BIAS,Sesgo alto,ESTE,2023-02-01,180.00,100.00
+P07-BIAS,Sesgo alto,ESTE,2023-03-01,180.00,100.00
+P07-BIAS,Sesgo alto,ESTE,2023-04-01,180.00,100.00
+P07-BIAS,Sesgo alto,ESTE,2023-05-01,180.00,100.00
+P07-BIAS,Sesgo alto,ESTE,2023-06-01,180.00,100.00
+P07-BIAS,Sesgo alto,ESTE,2023-07-01,180.00,100.00
+P07-BIAS,Sesgo alto,ESTE,2023-08-01,180.00,100.00
+P07-BIAS,Sesgo alto,ESTE,2023-09-01,180.00,100.00
+P07-BIAS,Sesgo alto,ESTE,2023-10-01,180.00,100.00
+P07-BIAS,Sesgo alto,ESTE,2023-11-01,180.00,100.00
+P07-BIAS,Sesgo alto,ESTE,2023-12-01,180.00,100.00
+P07-BIAS,Sesgo alto,ESTE,2024-01-01,180.00,100.00
+P07-BIAS,Sesgo alto,ESTE,2024-02-01,180.00,100.00
+P07-BIAS,Sesgo alto,ESTE,2024-03-01,180.00,100.00
+P07-BIAS,Sesgo alto,ESTE,2024-04-01,180.00,100.00
+P07-BIAS,Sesgo alto,ESTE,2024-05-01,180.00,100.00
+P07-BIAS,Sesgo alto,ESTE,2024-06-01,180.00,100.00
+P08-TREND,Tendencia creciente,OESTE,2023-01-01,100.00,100.00
+P08-TREND,Tendencia creciente,OESTE,2023-02-01,100.00,115.00
+P08-TREND,Tendencia creciente,OESTE,2023-03-01,100.00,130.00
+P08-TREND,Tendencia creciente,OESTE,2023-04-01,100.00,145.00
+P08-TREND,Tendencia creciente,OESTE,2023-05-01,100.00,160.00
+P08-TREND,Tendencia creciente,OESTE,2023-06-01,100.00,175.00
+P08-TREND,Tendencia creciente,OESTE,2023-07-01,100.00,190.00
+P08-TREND,Tendencia creciente,OESTE,2023-08-01,100.00,205.00
+P08-TREND,Tendencia creciente,OESTE,2023-09-01,100.00,220.00
+P08-TREND,Tendencia creciente,OESTE,2023-10-01,100.00,235.00
+P08-TREND,Tendencia creciente,OESTE,2023-11-01,100.00,250.00
+P08-TREND,Tendencia creciente,OESTE,2023-12-01,100.00,265.00
+P08-TREND,Tendencia creciente,OESTE,2024-01-01,100.00,280.00
+P08-TREND,Tendencia creciente,OESTE,2024-02-01,100.00,295.00
+P08-TREND,Tendencia creciente,OESTE,2024-03-01,100.00,310.00
+P08-TREND,Tendencia creciente,OESTE,2024-04-01,100.00,325.00
+P08-TREND,Tendencia creciente,OESTE,2024-05-01,100.00,340.00
+P08-TREND,Tendencia creciente,OESTE,2024-06-01,100.00,355.00
