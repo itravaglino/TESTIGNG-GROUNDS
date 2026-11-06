@@ -1,3 +1,6 @@
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { parseForecastCsv, parseDate, parseNumber } from "../src/engine/parse";
 import { computeMetrics } from "../src/engine/metrics";
@@ -114,6 +117,29 @@ describe("sample pipeline", () => {
     expect(by["SKU-LECHE-1L"].metricsCorrected.wape).not.toBeNull();
     expect(by["SKU-LECHE-1L"].metricsCorrected.wape!).toBeLessThan(0.2);
     expect(out.products.every((p) => p.models.length >= 3)).toBe(true);
+  });
+
+  it("classifies the 8-SKU shared fixture", () => {
+    const csv = readFileSync(
+      join(dirname(fileURLToPath(import.meta.url)), "fixtures/lote-8-skus.csv"),
+      "utf8",
+    );
+    const parsed = parseForecastCsv(csv);
+    expect(new Set(parsed.rows.map((r) => r.productId)).size).toBe(8);
+    const out = runForecastQa(csv);
+    const by = Object.fromEntries(out.products.map((p) => [p.productId, p]));
+    expect(out.summary.total).toBe(8);
+    expect(by["ZERO-01"].verdict).toBe("discard");
+    expect(by["SCALE-01"].verdict).toBe("discard");
+    expect(by["NEG-01"].verdict).toBe("correct");
+    expect(by["NEG-01"].corrected.every((p) => p.forecast >= 0)).toBe(true);
+    expect(by["BIAS-01"].verdict).toBe("correct");
+    expect(Math.abs(by["BIAS-01"].metricsCorrected.biasPct ?? 1)).toBeLessThan(0.08);
+    expect(by["GOOD-01"].verdict).toBe("keep");
+    expect(by["GOOD-01"].metricsCorrected.wape!).toBeLessThan(0.05);
+    expect(by["INTER-01"].profile.intermittency).toMatch(/intermittent|lumpy/);
+    expect(by["INTER-01"].models[0].id).toMatch(/croston|sba|tsb/);
+    expect(by["MISS-01"].verdict).toBe("correct");
   });
 
   it("maps English aliases", () => {

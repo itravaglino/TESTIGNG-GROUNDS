@@ -192,7 +192,7 @@ const CANDIDATES: Cand[] = [
     hyperparameters: "k=5 análogos, mix 70% analogía / 30% historia propia",
     dataNeeds: "Catálogo con atributos (categoría, precio, canal)",
     caveats: "Depende de un buen maestro de producto.",
-    score: (p) => (p.isNewProduct ? 92 : 5),
+    score: (p) => (p.n < 10 ? 92 : p.isNewProduct ? 48 : 5),
     why: (p) => p.isNewProduct ? `Solo ${p.n} puntos: analogía + prior es más seguro que ARIMA.` : "Ya hay historia propia.",
   },
   {
