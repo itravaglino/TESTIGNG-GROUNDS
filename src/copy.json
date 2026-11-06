@@ -1,0 +1,423 @@
+{
+  "locale": "es",
+  "product": "ForcastQA",
+  "titles": {
+    "app": "ForcastQA",
+    "document": "ForcastQA — Calidad del pronóstico",
+    "tagline": "Evalúe si un pronóstico es usable antes de llevarlo a la operación.",
+    "pages": {
+      "home": "Inicio",
+      "dashboard": "Panel de calidad",
+      "newEvaluation": "Nueva evaluación",
+      "upload": "Cargar archivo",
+      "results": "Resultados",
+      "series": "Detalle de la serie",
+      "compare": "Comparar modelos",
+      "glossary": "Glosario de métricas",
+      "csvSpec": "Formato del archivo",
+      "thresholds": "Umbrales",
+      "report": "Informe de calidad",
+      "history": "Historial"
+    },
+    "sections": {
+      "summary": "Resumen",
+      "verdict": "Veredicto",
+      "metrics": "Métricas",
+      "bias": "Sesgo",
+      "intervals": "Intervalos de predicción",
+      "byHorizon": "Por horizonte",
+      "bySeries": "Por serie",
+      "worstSeries": "Series con peor desempeño",
+      "assumptions": "Criterios aplicados",
+      "dataQuality": "Calidad de los datos",
+      "howToRead": "Cómo leer este resultado"
+    },
+    "actions": {
+      "uploadCsv": "Cargar CSV",
+      "runEvaluation": "Evaluar",
+      "downloadReport": "Descargar informe",
+      "viewGlossary": "Ver glosario",
+      "viewCsvSpec": "Ver formato del archivo",
+      "editThresholds": "Ajustar umbrales"
+    },
+    "states": {
+      "empty": "Todavía no hay evaluaciones",
+      "emptyHint": "Cargue un CSV con valores reales y pronósticos para obtener el primer veredicto.",
+      "loading": "Calculando métricas",
+      "ready": "Evaluación lista",
+      "error": "No se pudo completar la evaluación"
+    }
+  },
+  "glossary": {
+    "title": "Glosario de métricas de pronóstico",
+    "intro": "ForcastQA compara el pronóstico puntual con el valor real observado en el mismo periodo. El error de un periodo es la diferencia entre el pronóstico y el real. Un error positivo indica sobrepronóstico y un error negativo indica subpronóstico. Las métricas porcentuales se omiten en un periodo cuando el denominador es cero.",
+    "notation": {
+      "y": "y es el valor real.",
+      "yhat": "yhat es el pronóstico puntual.",
+      "n": "n es el número de periodos con real y pronóstico válidos.",
+      "h": "h es el horizonte, medido en periodos hacia adelante.",
+      "sign": "El error con signo es yhat menos y."
+    },
+    "metrics": [
+      {
+        "id": "mae",
+        "abbr": "MAE",
+        "name": "Error absoluto medio",
+        "formula": "MAE = (1/n) * suma(|yhat - y|)",
+        "unit": "La misma unidad que la serie.",
+        "definition": "Promedio del tamaño del error, sin tener en cuenta si el pronóstico quedó por encima o por debajo del real.",
+        "interpretation": "Un MAE más bajo indica un pronóstico más cercano a los reales. Sirve para comparar modelos sobre la misma serie y la misma escala.",
+        "caveat": "No es comparable entre series con unidades o niveles distintos."
+      },
+      {
+        "id": "rmse",
+        "abbr": "RMSE",
+        "name": "Raíz del error cuadrático medio",
+        "formula": "RMSE = raíz((1/n) * suma((yhat - y)^2))",
+        "unit": "La misma unidad que la serie.",
+        "definition": "Raíz cuadrada del promedio de los errores al cuadrado.",
+        "interpretation": "Penaliza más los errores grandes que el MAE. Un RMSE cercano al MAE indica errores de tamaño parejo. Un RMSE mucho mayor que el MAE indica unos pocos errores extremos.",
+        "caveat": "Un solo periodo atípico puede dominar el resultado."
+      },
+      {
+        "id": "bias",
+        "abbr": "Sesgo",
+        "name": "Error medio",
+        "formula": "Sesgo = (1/n) * suma(yhat - y)",
+        "unit": "La misma unidad que la serie.",
+        "definition": "Promedio del error con signo. Mide si el pronóstico se desplaza de forma sistemática.",
+        "interpretation": "Un sesgo positivo indica sobrepronóstico: en promedio se pronosticó de más. Un sesgo negativo indica subpronóstico: en promedio se pronosticó de menos. Un sesgo cercano a cero no implica exactitud, porque errores de signo contrario pueden cancelarse.",
+        "caveat": "Revise el sesgo junto con el MAE. Un sesgo nulo con un MAE alto sigue siendo un mal pronóstico."
+      },
+      {
+        "id": "mape",
+        "abbr": "MAPE",
+        "name": "Error porcentual absoluto medio",
+        "formula": "MAPE = (100/n) * suma(|yhat - y| / |y|)",
+        "unit": "Porcentaje.",
+        "definition": "Promedio del error absoluto expresado como porcentaje del valor real.",
+        "interpretation": "Un MAPE del 10 % significa que, en promedio, el pronóstico se desvió un 10 % del real. Es fácil de comunicar cuando los reales están lejos de cero.",
+        "caveat": "Se excluyen los periodos con real igual a cero. Con reales muy pequeños el MAPE se infla y deja de ser representativo. Prefiera el WAPE en series intermitentes."
+      },
+      {
+        "id": "smape",
+        "abbr": "sMAPE",
+        "name": "Error porcentual absoluto simétrico",
+        "formula": "sMAPE = (100/n) * suma(2 * |yhat - y| / (|y| + |yhat|))",
+        "unit": "Porcentaje, entre 0 y 200.",
+        "definition": "Error absoluto relativo al promedio de los valores absolutos del real y del pronóstico.",
+        "interpretation": "Trata de forma más equilibrada el sobrepronóstico y el subpronóstico que el MAPE. Un valor más bajo indica mejor ajuste.",
+        "caveat": "El periodo se excluye cuando el real y el pronóstico son ambos cero. La escala llega hasta 200, así que no lo lea como un MAPE convencional."
+      },
+      {
+        "id": "wape",
+        "abbr": "WAPE",
+        "name": "Error porcentual absoluto ponderado",
+        "formula": "WAPE = 100 * suma(|yhat - y|) / suma(|y|)",
+        "unit": "Porcentaje.",
+        "definition": "Suma de los errores absolutos dividida por la suma de los valores reales absolutos. También se conoce como wMAPE.",
+        "interpretation": "Los periodos de mayor volumen pesan más. Es la métrica porcentual principal de ForcastQA cuando la serie contiene ceros o niveles muy distintos.",
+        "caveat": "No se calcula si la suma de los valores reales absolutos es cero."
+      },
+      {
+        "id": "accuracy",
+        "abbr": "Exactitud",
+        "name": "Exactitud por WAPE",
+        "formula": "Exactitud = max(0, 100 - WAPE)",
+        "unit": "Porcentaje, entre 0 y 100.",
+        "definition": "Complemento del WAPE, recortado a cero cuando el error ponderado supera el 100 %.",
+        "interpretation": "Resume en una sola cifra cuánto del volumen real quedó explicado por el pronóstico. Un 100 % solo aparece si el pronóstico coincide con el real en todos los periodos.",
+        "caveat": "Es una vista del WAPE, no una métrica independiente. No use el MAPE para construir esta cifra."
+      },
+      {
+        "id": "mase",
+        "abbr": "MASE",
+        "name": "Error absoluto medio escalado",
+        "formula": "MASE = MAE / MAE_referencia",
+        "unit": "Adimensional.",
+        "definition": "MAE del pronóstico dividido por el MAE de un pronóstico de referencia en la misma serie. La referencia predeterminada es el ingenuo estacional: repetir el valor del mismo periodo en el ciclo anterior. Si no hay estacionalidad declarada, la referencia es el ingenuo de un periodo: repetir el último real.",
+        "interpretation": "Un MASE menor que 1 mejora a la referencia. Un MASE igual a 1 empata con la referencia. Un MASE mayor que 1 es peor que repetir un valor pasado.",
+        "caveat": "Si la referencia tiene error cero, el MASE no se informa. Compare modelos solo cuando compartan la misma referencia."
+      },
+      {
+        "id": "fva",
+        "abbr": "FVA",
+        "name": "Valor añadido del pronóstico",
+        "formula": "FVA = MAE_referencia - MAE",
+        "unit": "La misma unidad que la serie.",
+        "definition": "Reducción del MAE frente al pronóstico de referencia usado en el MASE.",
+        "interpretation": "Un FVA positivo indica que el modelo aporta valor sobre la referencia. Un FVA negativo indica que la referencia habría sido mejor.",
+        "caveat": "Un FVA positivo pequeño puede no justificar la complejidad del modelo."
+      },
+      {
+        "id": "tracking_signal",
+        "abbr": "TS",
+        "name": "Señal de seguimiento",
+        "formula": "TS = suma(yhat - y) / MAD, con MAD = (1/n) * suma(|yhat - y|)",
+        "unit": "Adimensional.",
+        "definition": "Error acumulado con signo, dividido por la desviación absoluta media.",
+        "interpretation": "Valores sostenidos por encima de 4 sugieren sobrepronóstico acumulado. Valores sostenidos por debajo de -4 sugieren subpronóstico acumulado. Sirve para detectar un sesgo que crece con el tiempo.",
+        "caveat": "Con pocos periodos la señal es inestable. No se calcula si el MAD es cero."
+      },
+      {
+        "id": "coverage",
+        "abbr": "Cobertura",
+        "name": "Cobertura del intervalo",
+        "formula": "Cobertura = 100 * (periodos con límite_inferior <= y <= límite_superior) / n_intervalos",
+        "unit": "Porcentaje.",
+        "definition": "Porcentaje de valores reales que cayeron dentro del intervalo de predicción declarado.",
+        "interpretation": "Para un intervalo nominal del 80 %, una cobertura cercana al 80 % está calibrada. Por debajo, el intervalo es demasiado estrecho. Por encima, es demasiado ancho y aporta poca información operativa.",
+        "caveat": "Solo se calcula en filas que traen límite inferior y límite superior. El nivel nominal se lee de la columna nivel_intervalo o, si falta, se asume 80."
+      },
+      {
+        "id": "interval_width",
+        "abbr": "Anchura",
+        "name": "Anchura media del intervalo",
+        "formula": "Anchura = (1/n) * suma(límite_superior - límite_inferior)",
+        "unit": "La misma unidad que la serie.",
+        "definition": "Promedio de la distancia entre el límite superior y el límite inferior.",
+        "interpretation": "A igual cobertura, un intervalo más estrecho es más útil. Una anchura grande con cobertura alta suele indicar un intervalo conservador.",
+        "caveat": "No sustituye a la cobertura. Un intervalo estrecho y mal calibrado no es un buen intervalo."
+      },
+      {
+        "id": "pinball",
+        "abbr": "Pinball",
+        "name": "Pérdida pinball",
+        "formula": "Pinball(q) = promedio( (y - yhat_q) * q  si y >= yhat_q;  (yhat_q - y) * (1 - q)  si y < yhat_q )",
+        "unit": "La misma unidad que la serie.",
+        "definition": "Pérdida asimétrica del pronóstico de un cuantil. q es el cuantil, entre 0 y 1.",
+        "interpretation": "Un valor más bajo indica un mejor pronóstico de ese cuantil. En el cuantil 0,5 coincide con la mitad del MAE.",
+        "caveat": "Solo se calcula si el archivo indica el cuantil de cada fila. No promedie la pérdida pinball entre cuantiles distintos."
+      }
+    ]
+  },
+  "csvFormat": {
+    "title": "Especificación del CSV",
+    "summary": "Un archivo por evaluación. Cada fila es un periodo de una serie: el valor real, el pronóstico puntual y, si existen, los límites del intervalo.",
+    "file": {
+      "encoding": "UTF-8. Se acepta marca de orden de bytes al inicio.",
+      "delimiter": "Coma.",
+      "decimalSeparator": "Punto.",
+      "thousandsSeparator": "No use separador de miles.",
+      "header": "La primera fila debe contener los nombres de columna.",
+      "lineEnding": "LF o CRLF.",
+      "quoting": "Encierre entre comillas dobles cualquier campo que contenga coma, comilla o salto de línea. Una comilla interna se escribe duplicada.",
+      "maxRows": "Hasta 200000 filas de datos, sin contar el encabezado."
+    },
+    "columns": [
+      {
+        "name": "serie_id",
+        "required": true,
+        "type": "texto",
+        "description": "Identificador estable de la serie. Puede ser un SKU, una cuenta o la combinación de dimensiones que defina la serie.",
+        "example": "SKU-1044"
+      },
+      {
+        "name": "fecha",
+        "required": true,
+        "type": "fecha",
+        "description": "Inicio del periodo, en formato ISO 8601: AAAA-MM-DD. Para una serie mensual use el primer día del mes.",
+        "example": "2026-03-01"
+      },
+      {
+        "name": "real",
+        "required": true,
+        "type": "número",
+        "description": "Valor observado. Vacío solo si el periodo todavía no ha ocurrido. Las filas sin real no entran en las métricas.",
+        "example": "128.5"
+      },
+      {
+        "name": "pronostico",
+        "required": true,
+        "type": "número",
+        "description": "Pronóstico puntual para ese periodo y esa serie.",
+        "example": "121.0"
+      },
+      {
+        "name": "horizonte",
+        "required": false,
+        "type": "entero",
+        "description": "Número de periodos de anticipación con los que se emitió el pronóstico. Use 1 para el periodo inmediato. Si se omite, todas las filas se tratan como un solo horizonte.",
+        "example": "1"
+      },
+      {
+        "name": "modelo",
+        "required": false,
+        "type": "texto",
+        "description": "Nombre del modelo o del proceso que produjo el pronóstico. Si hay más de un modelo, ForcastQA evalúa cada uno por separado.",
+        "example": "media-movil-8"
+      },
+      {
+        "name": "limite_inferior",
+        "required": false,
+        "type": "número",
+        "description": "Límite inferior del intervalo de predicción. Si informa uno de los dos límites, informe ambos.",
+        "example": "98.0"
+      },
+      {
+        "name": "limite_superior",
+        "required": false,
+        "type": "número",
+        "description": "Límite superior del intervalo de predicción. Debe ser mayor o igual que el límite inferior.",
+        "example": "146.0"
+      },
+      {
+        "name": "nivel_intervalo",
+        "required": false,
+        "type": "número",
+        "description": "Nivel nominal del intervalo, en porcentaje, entre 1 y 99. Si falta, ForcastQA asume 80.",
+        "example": "80"
+      },
+      {
+        "name": "cuantil",
+        "required": false,
+        "type": "número",
+        "description": "Cuantil del pronóstico puntual cuando la fila no representa la media. Valor entre 0 y 1, exclusivo. Use 0.5 para la mediana. Obligatorio solo si quiere la pérdida pinball.",
+        "example": "0.9"
+      },
+      {
+        "name": "frecuencia",
+        "required": false,
+        "type": "texto",
+        "description": "Frecuencia de la serie: D (diaria), W (semanal), M (mensual) o Q (trimestral). Si falta, se infiere por la distancia entre fechas de la serie.",
+        "example": "M"
+      }
+    ],
+    "rules": [
+      "Los nombres de columna se aceptan en minúsculas. Los espacios al inicio y al final se ignoran.",
+      "La clave de una fila es serie_id, fecha, horizonte y modelo. Una clave repetida invalida el archivo.",
+      "real, pronostico, limite_inferior, limite_superior, nivel_intervalo y cuantil usan punto decimal y no admiten texto ni símbolo de moneda.",
+      "El orden de las filas no importa. ForcastQA ordena cada serie por fecha y horizonte antes de calcular.",
+      "Un real vacío se conserva como periodo futuro y queda fuera del cálculo. Un pronóstico vacío en una fila con real es un error de formato.",
+      "limite_inferior debe ser menor o igual que limite_superior. El pronóstico puntual puede caer fuera del intervalo, y en ese caso la fila se marca para revisión.",
+      "Las filas de una misma serie deben compartir frecuencia. Mezclar fechas diarias y mensuales en la misma serie es un error.",
+      "Se necesitan al menos 8 periodos con real y pronóstico en una serie para emitir veredicto. Con menos periodos la serie queda como no concluyente y sí entra en los totales de volumen."
+    ],
+    "example": "serie_id,fecha,real,pronostico,horizonte,modelo,limite_inferior,limite_superior,nivel_intervalo,frecuencia\nSKU-1044,2026-01-01,110,104,1,media-movil-8,90,122,80,M\nSKU-1044,2026-02-01,128.5,121,1,media-movil-8,98,146,80,M\nSKU-1044,2026-03-01,119,125,1,media-movil-8,101,149,80,M\nSKU-2201,2026-01-06,40,44,1,ingenuo-estacional,22,66,80,W\nSKU-2201,2026-01-13,36,39,1,ingenuo-estacional,18,61,80,W"
+  },
+  "verdicts": {
+    "title": "Veredictos",
+    "intro": "El veredicto resume si el pronóstico puede usarse con los umbrales activos. Las métricas siguen visibles cuando el veredicto es rechazado o no concluyente.",
+    "statuses": [
+      {
+        "id": "pass",
+        "label": "Aprobado",
+        "summary": "El pronóstico cumple los umbrales de exactitud, sesgo y calibración.",
+        "meaning": "Puede pasar a la operación. Conserve el informe junto con la versión del archivo evaluado.",
+        "condition": "WAPE dentro del máximo, valor absoluto del sesgo dentro del máximo, MASE menor que 1 cuando hay referencia, y cobertura dentro de la banda del nivel nominal si el archivo trae intervalos."
+      },
+      {
+        "id": "review",
+        "label": "En revisión",
+        "summary": "El pronóstico es utilizable solo con una salvedad acotada.",
+        "meaning": "Revise las series o los horizontes marcados antes de publicarlo. El resto puede mantenerse.",
+        "condition": "Una métrica principal queda cerca del umbral, el sesgo tiene signo persistente sin romper el máximo, o la cobertura se desvía de forma leve del nivel nominal."
+      },
+      {
+        "id": "fail",
+        "label": "Rechazado",
+        "summary": "El pronóstico no cumple al menos un umbral principal.",
+        "meaning": "No lo publique. Corrija el modelo, el horizonte o los datos y vuelva a evaluar.",
+        "condition": "WAPE por encima del máximo, sesgo fuera de banda, MASE mayor que 1, o cobertura claramente por debajo del nivel nominal."
+      },
+      {
+        "id": "inconclusive",
+        "label": "No concluyente",
+        "summary": "No hay historia suficiente para sostener un veredicto.",
+        "meaning": "Amplíe la ventana de reales o separe las series con menos de 8 periodos comparables.",
+        "condition": "Menos de 8 periodos con real y pronóstico, referencia indefinida cuando el umbral depende del MASE, o suma de reales igual a cero en todas las filas evaluables."
+      }
+    ],
+    "reasons": [
+      {
+        "id": "within_tolerance",
+        "label": "Dentro de tolerancia",
+        "appliesTo": "pass",
+        "text": "Exactitud, sesgo y cobertura, si aplica, están dentro de los umbrales activos."
+      },
+      {
+        "id": "accuracy_below_threshold",
+        "label": "Exactitud insuficiente",
+        "appliesTo": "fail",
+        "text": "El WAPE supera el máximo configurado. El error pesa más en los periodos de mayor volumen."
+      },
+      {
+        "id": "accuracy_near_threshold",
+        "label": "Exactitud en el límite",
+        "appliesTo": "review",
+        "text": "El WAPE está por debajo del máximo, a una distancia menor que el margen de revisión."
+      },
+      {
+        "id": "systematic_overforecast",
+        "label": "Sobrepronóstico sistemático",
+        "appliesTo": "fail",
+        "text": "El sesgo positivo supera el máximo. En promedio se pronosticó por encima del real."
+      },
+      {
+        "id": "systematic_underforecast",
+        "label": "Subpronóstico sistemático",
+        "appliesTo": "fail",
+        "text": "El sesgo negativo supera el máximo. En promedio se pronosticó por debajo del real."
+      },
+      {
+        "id": "bias_drifting",
+        "label": "Sesgo en deriva",
+        "appliesTo": "review",
+        "text": "La señal de seguimiento salió de la banda entre -4 y 4. El sesgo se está acumulando."
+      },
+      {
+        "id": "worse_than_reference",
+        "label": "Peor que la referencia",
+        "appliesTo": "fail",
+        "text": "El MASE es mayor que 1. El pronóstico de referencia habría tenido menor error absoluto."
+      },
+      {
+        "id": "interval_undercoverage",
+        "label": "Intervalo estrecho",
+        "appliesTo": "fail",
+        "text": "La cobertura quedó por debajo de la banda admitida para el nivel nominal. El intervalo deja fuera demasiados reales."
+      },
+      {
+        "id": "interval_overcoverage",
+        "label": "Intervalo holgado",
+        "appliesTo": "review",
+        "text": "La cobertura supera la banda admitida. El intervalo contiene los reales, pero es más ancho de lo necesario."
+      },
+      {
+        "id": "point_outside_interval",
+        "label": "Puntual fuera del intervalo",
+        "appliesTo": "review",
+        "text": "Hay filas cuyo pronóstico puntual cae fuera de sus propios límites. Revise cómo se construyó el intervalo."
+      },
+      {
+        "id": "sparse_history",
+        "label": "Historia insuficiente",
+        "appliesTo": "inconclusive",
+        "text": "La serie tiene menos de 8 periodos con real y pronóstico. El veredicto de esa serie no se emite."
+      },
+      {
+        "id": "zero_volume",
+        "label": "Sin volumen real",
+        "appliesTo": "inconclusive",
+        "text": "La suma de los valores reales es cero. El WAPE y la exactitud no se calculan."
+      },
+      {
+        "id": "schema_invalid",
+        "label": "Archivo inválido",
+        "appliesTo": "fail",
+        "text": "El CSV no cumple la especificación. Corrija columnas, tipos o claves duplicadas y cargue el archivo de nuevo."
+      }
+    ],
+    "defaultThresholds": {
+      "maxWapePct": 20,
+      "reviewMarginWapePct": 2,
+      "maxAbsBiasPctOfVolume": 5,
+      "maxMase": 1,
+      "trackingSignalBand": 4,
+      "coverageBandPct": 5,
+      "nominalIntervalPct": 80,
+      "minPeriods": 8
+    },
+    "thresholdNotes": "Estos umbrales son el punto de partida de ForcastQA. Un equipo puede sustituirlos en la evaluación. El veredicto siempre indica qué umbrales se usaron."
+  }
+}

@@ -1,0 +1,416 @@
+producto;nombre;fecha;forecast;real;modelo;ubicacion;canal;horizonte;lower;upper
+SKU-1001;Café de Altura 340g;2025-01-06;214.67;207.59;prophet;CDMX;autoservicio;4;180.32;249.01
+SKU-1001;Café de Altura 340g;2025-01-13;221.64;216.82;prophet;CDMX;autoservicio;4;186.17;257.10
+SKU-1001;Café de Altura 340g;2025-01-20;224.50;238.08;prophet;CDMX;autoservicio;4;188.58;260.42
+SKU-1001;Café de Altura 340g;2025-01-27;224.07;221.50;prophet;CDMX;autoservicio;4;188.22;259.92
+SKU-1001;Café de Altura 340g;2025-02-03;221.64;218.59;prophet;CDMX;autoservicio;4;186.18;257.10
+SKU-1001;Café de Altura 340g;2025-02-10;205.97;214.91;prophet;CDMX;autoservicio;4;173.01;238.92
+SKU-1001;Café de Altura 340g;2025-02-17;205.80;205.46;prophet;CDMX;autoservicio;4;172.87;238.72
+SKU-1001;Café de Altura 340g;2025-02-24;195.42;200.07;prophet;CDMX;autoservicio;4;164.16;226.69
+SKU-1001;Café de Altura 340g;2025-03-03;182.55;183.94;prophet;CDMX;autoservicio;4;153.34;211.75
+SKU-1001;Café de Altura 340g;2025-03-10;179.91;177.55;prophet;CDMX;autoservicio;4;151.12;208.70
+SKU-1001;Café de Altura 340g;2025-03-17;167.95;180.56;prophet;CDMX;autoservicio;4;141.08;194.82
+SKU-1001;Café de Altura 340g;2025-03-24;159.31;155.30;prophet;CDMX;autoservicio;4;133.82;184.80
+SKU-1001;Café de Altura 340g;2025-03-31;167.49;153.65;prophet;CDMX;autoservicio;4;140.70;194.29
+SKU-1001;Café de Altura 340g;2025-04-07;159.07;154.30;prophet;CDMX;autoservicio;4;133.62;184.52
+SKU-1001;Café de Altura 340g;2025-04-14;162.31;160.01;prophet;CDMX;autoservicio;4;136.34;188.28
+SKU-1001;Café de Altura 340g;2025-04-21;158.98;166.15;prophet;CDMX;autoservicio;4;133.54;184.41
+SKU-1001;Café de Altura 340g;2025-04-28;152.67;147.43;prophet;CDMX;autoservicio;4;128.25;177.10
+SKU-1001;Café de Altura 340g;2025-05-05;146.61;151.75;prophet;CDMX;autoservicio;4;123.15;170.07
+SKU-1001;Café de Altura 340g;2025-05-12;143.32;134.97;prophet;CDMX;autoservicio;4;120.39;166.25
+SKU-1001;Café de Altura 340g;2025-05-19;124.99;117.36;prophet;CDMX;autoservicio;4;105.00;144.99
+SKU-1001;Café de Altura 340g;2025-05-26;120.08;113.27;prophet;CDMX;autoservicio;4;100.86;139.29
+SKU-1001;Café de Altura 340g;2025-06-02;104.82;108.62;prophet;CDMX;autoservicio;4;88.05;121.59
+SKU-1001;Café de Altura 340g;2025-06-09;96.58;96.69;prophet;CDMX;autoservicio;4;81.13;112.04
+SKU-1001;Café de Altura 340g;2025-06-16;96.18;89.25;prophet;CDMX;autoservicio;4;80.79;111.57
+SKU-1001;Café de Altura 340g;2025-06-23;95.29;88.82;prophet;CDMX;autoservicio;4;80.04;110.53
+SKU-1001;Café de Altura 340g;2025-06-30;96.50;106.30;prophet;CDMX;autoservicio;4;81.06;111.94
+SKU-1001;Café de Altura 340g;2025-07-07;109.32;101.15;prophet;CDMX;autoservicio;4;91.83;126.81
+SKU-1001;Café de Altura 340g;2025-07-14;111.14;108.34;prophet;CDMX;autoservicio;4;93.35;128.92
+SKU-1001;Café de Altura 340g;2025-07-21;120.32;115.55;prophet;CDMX;autoservicio;4;101.07;139.57
+SKU-1001;Café de Altura 340g;2025-07-28;124.62;115.97;prophet;CDMX;autoservicio;4;104.68;144.56
+SKU-1001;Café de Altura 340g;2025-08-04;121.63;120.31;prophet;CDMX;autoservicio;4;102.17;141.10
+SKU-1001;Café de Altura 340g;2025-08-11;128.12;121.49;prophet;CDMX;autoservicio;4;107.62;148.62
+SKU-1001;Café de Altura 340g;2025-08-18;125.14;124.75;prophet;CDMX;autoservicio;4;105.12;145.17
+SKU-1001;Café de Altura 340g;2025-08-25;117.69;119.69;prophet;CDMX;autoservicio;4;98.86;136.53
+SKU-1001;Café de Altura 340g;2025-09-01;118.54;123.38;prophet;CDMX;autoservicio;4;99.57;137.51
+SKU-1001;Café de Altura 340g;2025-09-08;122.89;117.36;prophet;CDMX;autoservicio;4;103.22;142.55
+SKU-1001;Café de Altura 340g;2025-09-15;131.62;124.83;prophet;CDMX;autoservicio;4;110.56;152.68
+SKU-1001;Café de Altura 340g;2025-09-22;142.16;137.13;prophet;CDMX;autoservicio;4;119.41;164.90
+SKU-1001;Café de Altura 340g;2025-09-29;148.86;140.62;prophet;CDMX;autoservicio;4;125.05;172.68
+SKU-1001;Café de Altura 340g;2025-10-06;159.32;158.57;prophet;CDMX;autoservicio;4;133.83;184.81
+SKU-1001;Café de Altura 340g;2025-10-13;175.01;173.06;prophet;CDMX;autoservicio;4;147.01;203.01
+SKU-1001;Café de Altura 340g;2025-10-20;185.60;176.31;prophet;CDMX;autoservicio;4;155.90;215.29
+SKU-1001;Café de Altura 340g;2025-10-27;190.31;191.81;prophet;CDMX;autoservicio;4;159.86;220.75
+SKU-1001;Café de Altura 340g;2025-11-03;198.26;204.03;prophet;CDMX;autoservicio;4;166.54;229.99
+SKU-1001;Café de Altura 340g;2025-11-10;201.97;200.23;prophet;CDMX;autoservicio;4;169.65;234.28
+SKU-1001;Café de Altura 340g;2025-11-17;204.55;203.24;prophet;CDMX;autoservicio;4;171.82;237.27
+SKU-1001;Café de Altura 340g;2025-11-24;197.19;197.80;prophet;CDMX;autoservicio;4;165.64;228.74
+SKU-1001;Café de Altura 340g;2025-12-01;197.62;199.80;prophet;CDMX;autoservicio;4;166.00;229.23
+SKU-1001;Café de Altura 340g;2025-12-08;195.11;191.23;prophet;CDMX;autoservicio;4;163.90;226.33
+SKU-1001;Café de Altura 340g;2025-12-15;206.61;207.30;prophet;CDMX;autoservicio;4;173.55;239.66
+SKU-1001;Café de Altura 340g;2025-12-22;209.69;204.72;prophet;CDMX;autoservicio;4;176.14;243.24
+SKU-1001;Café de Altura 340g;2025-12-29;209.06;209.60;prophet;CDMX;autoservicio;4;175.61;242.51
+SKU-1002;Filtro Hidráulico FH-40;2025-01-06;1.67;0.00;croston;MTY;mayoreo;4;0.00;4.00
+SKU-1002;Filtro Hidráulico FH-40;2025-01-13;1.67;0.00;croston;MTY;mayoreo;4;0.00;4.00
+SKU-1002;Filtro Hidráulico FH-40;2025-01-20;1.67;8.00;croston;MTY;mayoreo;4;0.00;4.00
+SKU-1002;Filtro Hidráulico FH-40;2025-01-27;1.84;0.00;croston;MTY;mayoreo;4;0.00;4.42
+SKU-1002;Filtro Hidráulico FH-40;2025-02-03;1.84;0.00;croston;MTY;mayoreo;4;0.00;4.42
+SKU-1002;Filtro Hidráulico FH-40;2025-02-10;1.84;0.00;croston;MTY;mayoreo;4;0.00;4.42
+SKU-1002;Filtro Hidráulico FH-40;2025-02-17;1.84;3.00;croston;MTY;mayoreo;4;0.00;4.42
+SKU-1002;Filtro Hidráulico FH-40;2025-02-24;1.57;0.00;croston;MTY;mayoreo;4;0.00;3.76
+SKU-1002;Filtro Hidráulico FH-40;2025-03-03;1.57;0.00;croston;MTY;mayoreo;4;0.00;3.76
+SKU-1002;Filtro Hidráulico FH-40;2025-03-10;1.57;0.00;croston;MTY;mayoreo;4;0.00;3.76
+SKU-1002;Filtro Hidráulico FH-40;2025-03-17;1.57;0.00;croston;MTY;mayoreo;4;0.00;3.76
+SKU-1002;Filtro Hidráulico FH-40;2025-03-24;1.57;24.00;croston;MTY;mayoreo;4;0.00;12.00
+SKU-1002;Filtro Hidráulico FH-40;2025-03-31;2.57;0.00;croston;MTY;mayoreo;4;0.00;6.17
+SKU-1002;Filtro Hidráulico FH-40;2025-04-07;2.57;0.00;croston;MTY;mayoreo;4;0.00;6.17
+SKU-1002;Filtro Hidráulico FH-40;2025-04-14;2.57;0.00;croston;MTY;mayoreo;4;0.00;6.17
+SKU-1002;Filtro Hidráulico FH-40;2025-04-21;2.57;0.00;croston;MTY;mayoreo;4;0.00;6.17
+SKU-1002;Filtro Hidráulico FH-40;2025-04-28;2.57;0.00;croston;MTY;mayoreo;4;0.00;6.17
+SKU-1002;Filtro Hidráulico FH-40;2025-05-05;2.57;5.00;croston;MTY;mayoreo;4;0.00;6.17
+SKU-1002;Filtro Hidráulico FH-40;2025-05-12;1.97;16.00;croston;MTY;mayoreo;4;0.00;8.00
+SKU-1002;Filtro Hidráulico FH-40;2025-05-19;3.04;0.00;croston;MTY;mayoreo;4;0.00;7.29
+SKU-1002;Filtro Hidráulico FH-40;2025-05-26;3.04;0.00;croston;MTY;mayoreo;4;0.00;7.29
+SKU-1002;Filtro Hidráulico FH-40;2025-06-02;3.04;0.00;croston;MTY;mayoreo;4;0.00;7.29
+SKU-1002;Filtro Hidráulico FH-40;2025-06-09;3.04;0.00;croston;MTY;mayoreo;4;0.00;7.29
+SKU-1002;Filtro Hidráulico FH-40;2025-06-16;3.04;0.00;croston;MTY;mayoreo;4;0.00;7.29
+SKU-1002;Filtro Hidráulico FH-40;2025-06-23;3.04;0.00;croston;MTY;mayoreo;4;0.00;7.29
+SKU-1002;Filtro Hidráulico FH-40;2025-06-30;3.04;2.00;croston;MTY;mayoreo;4;0.00;7.29
+SKU-1002;Filtro Hidráulico FH-40;2025-07-07;1.85;0.00;croston;MTY;mayoreo;4;0.00;4.43
+SKU-1002;Filtro Hidráulico FH-40;2025-07-14;1.85;0.00;croston;MTY;mayoreo;4;0.00;4.43
+SKU-1002;Filtro Hidráulico FH-40;2025-07-21;1.85;0.00;croston;MTY;mayoreo;4;0.00;4.43
+SKU-1002;Filtro Hidráulico FH-40;2025-07-28;1.85;0.00;croston;MTY;mayoreo;4;0.00;4.43
+SKU-1002;Filtro Hidráulico FH-40;2025-08-04;1.85;0.00;croston;MTY;mayoreo;4;0.00;4.43
+SKU-1002;Filtro Hidráulico FH-40;2025-08-11;1.85;40.00;croston;MTY;mayoreo;4;0.00;20.00
+SKU-1002;Filtro Hidráulico FH-40;2025-08-18;3.52;0.00;croston;MTY;mayoreo;4;0.00;8.44
+SKU-1002;Filtro Hidráulico FH-40;2025-08-25;3.52;0.00;croston;MTY;mayoreo;4;0.00;8.44
+SKU-1002;Filtro Hidráulico FH-40;2025-09-01;3.52;0.00;croston;MTY;mayoreo;4;0.00;8.44
+SKU-1002;Filtro Hidráulico FH-40;2025-09-08;3.52;0.00;croston;MTY;mayoreo;4;0.00;8.44
+SKU-1002;Filtro Hidráulico FH-40;2025-09-15;3.52;7.00;croston;MTY;mayoreo;4;0.00;8.44
+SKU-1002;Filtro Hidráulico FH-40;2025-09-22;2.90;0.00;croston;MTY;mayoreo;4;0.00;6.96
+SKU-1002;Filtro Hidráulico FH-40;2025-09-29;2.90;0.00;croston;MTY;mayoreo;4;0.00;6.96
+SKU-1002;Filtro Hidráulico FH-40;2025-10-06;2.90;0.00;croston;MTY;mayoreo;4;0.00;6.96
+SKU-1002;Filtro Hidráulico FH-40;2025-10-13;2.90;0.00;croston;MTY;mayoreo;4;0.00;6.96
+SKU-1002;Filtro Hidráulico FH-40;2025-10-20;2.90;0.00;croston;MTY;mayoreo;4;0.00;6.96
+SKU-1002;Filtro Hidráulico FH-40;2025-10-27;2.90;12.00;croston;MTY;mayoreo;4;0.00;6.96
+SKU-1002;Filtro Hidráulico FH-40;2025-11-03;2.60;0.00;croston;MTY;mayoreo;4;0.00;6.24
+SKU-1002;Filtro Hidráulico FH-40;2025-11-10;2.60;0.00;croston;MTY;mayoreo;4;0.00;6.24
+SKU-1002;Filtro Hidráulico FH-40;2025-11-17;2.60;0.00;croston;MTY;mayoreo;4;0.00;6.24
+SKU-1002;Filtro Hidráulico FH-40;2025-11-24;2.60;0.00;croston;MTY;mayoreo;4;0.00;6.24
+SKU-1002;Filtro Hidráulico FH-40;2025-12-01;2.60;0.00;croston;MTY;mayoreo;4;0.00;6.24
+SKU-1002;Filtro Hidráulico FH-40;2025-12-08;2.60;6.00;croston;MTY;mayoreo;4;0.00;6.24
+SKU-1002;Filtro Hidráulico FH-40;2025-12-15;2.08;0.00;croston;MTY;mayoreo;4;0.00;5.00
+SKU-1002;Filtro Hidráulico FH-40;2025-12-22;2.08;0.00;croston;MTY;mayoreo;4;0.00;5.00
+SKU-1002;Filtro Hidráulico FH-40;2025-12-29;2.08;19.00;croston;MTY;mayoreo;4;0.00;9.50
+SKU-1003;Aceite Motor 1L;2025-01-06;78950.00;78.95;xgboost;GDL;autoservicio;4;74213.00;83687.00
+SKU-1003;Aceite Motor 1L;2025-01-13;80190.00;79.67;xgboost;GDL;autoservicio;4;75378.60;85001.40
+SKU-1003;Aceite Motor 1L;2025-01-20;74680.00;73.77;xgboost;GDL;autoservicio;4;70199.20;79160.80
+SKU-1003;Aceite Motor 1L;2025-01-27;77320.00;76.04;xgboost;GDL;autoservicio;4;72680.80;81959.20
+SKU-1003;Aceite Motor 1L;2025-02-03;76820.00;75.36;xgboost;GDL;autoservicio;4;72210.80;81429.20
+SKU-1003;Aceite Motor 1L;2025-02-10;76910.00;75.41;xgboost;GDL;autoservicio;4;72295.40;81524.60
+SKU-1003;Aceite Motor 1L;2025-02-17;85070.00;83.55;xgboost;GDL;autoservicio;4;79965.80;90174.20
+SKU-1003;Aceite Motor 1L;2025-02-24;91990.00;90.68;xgboost;GDL;autoservicio;4;86470.60;97509.40
+SKU-1003;Aceite Motor 1L;2025-03-03;98030.00;97.14;xgboost;GDL;autoservicio;4;92148.20;103911.80
+SKU-1003;Aceite Motor 1L;2025-03-10;95640.00;95.37;xgboost;GDL;autoservicio;4;89901.60;101378.40
+SKU-1003;Aceite Motor 1L;2025-03-17;94100.00;94.46;xgboost;GDL;autoservicio;4;88454.00;99746.00
+SKU-1003;Aceite Motor 1L;2025-03-24;90150.00;91.06;xgboost;GDL;autoservicio;4;84741.00;95559.00
+SKU-1003;Aceite Motor 1L;2025-03-31;91320.00;92.72;xgboost;GDL;autoservicio;4;85840.80;96799.20
+SKU-1003;Aceite Motor 1L;2025-04-07;98360.00;100.22;xgboost;GDL;autoservicio;4;92458.40;104261.60
+SKU-1003;Aceite Motor 1L;2025-04-14;103080.00;105.18;xgboost;GDL;autoservicio;4;96895.20;109264.80
+SKU-1003;Aceite Motor 1L;2025-04-21;110320.00;112.48;xgboost;GDL;autoservicio;4;103700.80;116939.20
+SKU-1003;Aceite Motor 1L;2025-04-28;115240.00;117.15;xgboost;GDL;autoservicio;4;108325.60;122154.40
+SKU-1003;Aceite Motor 1L;2025-05-05;113660.00;114.99;xgboost;GDL;autoservicio;4;106840.40;120479.60
+SKU-1003;Aceite Motor 1L;2025-05-12;109720.00;110.34;xgboost;GDL;autoservicio;4;103136.80;116303.20
+SKU-1003;Aceite Motor 1L;2025-05-19;110220.00;110.11;xgboost;GDL;autoservicio;4;103606.80;116833.20
+SKU-1003;Aceite Motor 1L;2025-05-26;108870.00;108.06;xgboost;GDL;autoservicio;4;102337.80;115402.20
+SKU-1003;Aceite Motor 1L;2025-06-02;112140.00;110.69;xgboost;GDL;autoservicio;4;105411.60;118868.40
+SKU-1003;Aceite Motor 1L;2025-06-09;117150.00;115.15;xgboost;GDL;autoservicio;4;110121.00;124179.00
+SKU-1003;Aceite Motor 1L;2025-06-16;126720.00;124.28;xgboost;GDL;autoservicio;4;119116.80;134323.20
+SKU-1003;Aceite Motor 1L;2025-06-23;130360.00;127.83;xgboost;GDL;autoservicio;4;122538.40;138181.60
+SKU-1003;Aceite Motor 1L;2025-06-30;121470.00;119.35;xgboost;GDL;autoservicio;4;114181.80;128758.20
+SKU-1003;Aceite Motor 1L;2025-07-07;118140.00;116.54;xgboost;GDL;autoservicio;4;111051.60;125228.40
+SKU-1003;Aceite Motor 1L;2025-07-14;110490.00;109.59;xgboost;GDL;autoservicio;4;103860.60;117119.40
+SKU-1003;Aceite Motor 1L;2025-07-21;108470.00;108.27;xgboost;GDL;autoservicio;4;101961.80;114978.20
+SKU-1003;Aceite Motor 1L;2025-07-28;105340.00;105.85;xgboost;GDL;autoservicio;4;99019.60;111660.40
+SKU-1003;Aceite Motor 1L;2025-08-04;108230.00;109.42;xgboost;GDL;autoservicio;4;101736.20;114723.80
+SKU-1003;Aceite Motor 1L;2025-08-11;107680.00;109.41;xgboost;GDL;autoservicio;4;101219.20;114140.80
+SKU-1003;Aceite Motor 1L;2025-08-18;110090.00;112.21;xgboost;GDL;autoservicio;4;103484.60;116695.40
+SKU-1003;Aceite Motor 1L;2025-08-25;107060.00;109.24;xgboost;GDL;autoservicio;4;100636.40;113483.60
+SKU-1003;Aceite Motor 1L;2025-09-01;99500.00;101.41;xgboost;GDL;autoservicio;4;93530.00;105470.00
+SKU-1003;Aceite Motor 1L;2025-09-08;92500.00;93.97;xgboost;GDL;autoservicio;4;86950.00;98050.00
+SKU-1003;Aceite Motor 1L;2025-09-15;85970.00;86.90;xgboost;GDL;autoservicio;4;80811.80;91128.20
+SKU-1003;Aceite Motor 1L;2025-09-22;90550.00;90.97;xgboost;GDL;autoservicio;4;85117.00;95983.00
+SKU-1003;Aceite Motor 1L;2025-09-29;93400.00;93.21;xgboost;GDL;autoservicio;4;87796.00;99004.00
+SKU-1003;Aceite Motor 1L;2025-10-06;93600.00;92.82;xgboost;GDL;autoservicio;4;87984.00;99216.00
+SKU-1003;Aceite Motor 1L;2025-10-13;92970.00;91.70;xgboost;GDL;autoservicio;4;87391.80;98548.20
+SKU-1003;Aceite Motor 1L;2025-10-20;87850.00;86.31;xgboost;GDL;autoservicio;4;82579.00;93121.00
+SKU-1003;Aceite Motor 1L;2025-10-27;80940.00;79.37;xgboost;GDL;autoservicio;4;76083.60;85796.40
+SKU-1003;Aceite Motor 1L;2025-11-03;73220.00;71.81;xgboost;GDL;autoservicio;4;68826.80;77613.20
+SKU-1003;Aceite Motor 1L;2025-11-10;71240.00;70.03;xgboost;GDL;autoservicio;4;66965.60;75514.40
+SKU-1003;Aceite Motor 1L;2025-11-17;73670.00;72.72;xgboost;GDL;autoservicio;4;69249.80;78090.20
+SKU-1003;Aceite Motor 1L;2025-11-24;73780.00;73.24;xgboost;GDL;autoservicio;4;69353.20;78206.80
+SKU-1003;Aceite Motor 1L;2025-12-01;75480.00;75.42;xgboost;GDL;autoservicio;4;70951.20;80008.80
+SKU-1003;Aceite Motor 1L;2025-12-08;78940.00;79.40;xgboost;GDL;autoservicio;4;74203.60;83676.40
+SKU-1003;Aceite Motor 1L;2025-12-15;76960.00;77.87;xgboost;GDL;autoservicio;4;72342.40;81577.60
+SKU-1003;Aceite Motor 1L;2025-12-22;69860.00;71.02;xgboost;GDL;autoservicio;4;65668.40;74051.60
+SKU-1003;Aceite Motor 1L;2025-12-29;69610.00;70.97;xgboost;GDL;autoservicio;4;65433.40;73786.60
+SKU-1004;Yogurt Natural 1kg;2025-01-06;310.21;313.57;lstm;PUE;ecommerce;4;272.98;347.44
+SKU-1004;Yogurt Natural 1kg;2025-01-13;319.97;314.05;lstm;PUE;ecommerce;4;281.57;358.37
+SKU-1004;Yogurt Natural 1kg;2025-01-20;310.13;321.21;lstm;PUE;ecommerce;4;272.91;347.35
+SKU-1004;Yogurt Natural 1kg;2025-01-27;301.33;334.26;lstm;PUE;ecommerce;4;265.17;337.49
+SKU-1004;Yogurt Natural 1kg;2025-02-03;-12.50;312.63;lstm;PUE;ecommerce;4;-30.50;-6.50
+SKU-1004;Yogurt Natural 1kg;2025-02-10;306.62;294.26;lstm;PUE;ecommerce;4;269.83;343.41
+SKU-1004;Yogurt Natural 1kg;2025-02-17;299.68;303.99;lstm;PUE;ecommerce;4;263.72;335.64
+SKU-1004;Yogurt Natural 1kg;2025-02-24;313.26;313.04;lstm;PUE;ecommerce;4;275.67;350.85
+SKU-1004;Yogurt Natural 1kg;2025-03-03;291.68;289.58;lstm;PUE;ecommerce;4;256.68;326.68
+SKU-1004;Yogurt Natural 1kg;2025-03-10;290.87;-15.00;lstm;PUE;ecommerce;4;261.78;319.96
+SKU-1004;Yogurt Natural 1kg;2025-03-17;293.95;290.92;lstm;PUE;ecommerce;4;258.68;329.22
+SKU-1004;Yogurt Natural 1kg;2025-03-24;294.51;301.48;lstm;PUE;ecommerce;4;259.17;329.85
+SKU-1004;Yogurt Natural 1kg;2025-03-31;294.86;280.77;lstm;PUE;ecommerce;4;259.48;330.24
+SKU-1004;Yogurt Natural 1kg;2025-04-07;-40.00;295.85;lstm;PUE;ecommerce;4;-58.00;-34.00
+SKU-1004;Yogurt Natural 1kg;2025-04-14;279.09;266.79;lstm;PUE;ecommerce;4;245.60;312.58
+SKU-1004;Yogurt Natural 1kg;2025-04-21;268.83;276.47;lstm;PUE;ecommerce;4;236.57;301.09
+SKU-1004;Yogurt Natural 1kg;2025-04-28;272.49;263.63;lstm;PUE;ecommerce;4;239.79;305.19
+SKU-1004;Yogurt Natural 1kg;2025-05-05;262.32;263.84;lstm;PUE;ecommerce;4;230.84;293.80
+SKU-1004;Yogurt Natural 1kg;2025-05-12;253.83;265.63;lstm;PUE;ecommerce;4;223.37;284.29
+SKU-1004;Yogurt Natural 1kg;2025-05-19;-7.25;250.16;lstm;PUE;ecommerce;4;-25.25;-1.25
+SKU-1004;Yogurt Natural 1kg;2025-05-26;257.66;250.33;lstm;PUE;ecommerce;4;226.74;288.58
+SKU-1004;Yogurt Natural 1kg;2025-06-02;250.94;-8.50;lstm;PUE;ecommerce;4;225.85;276.03
+SKU-1004;Yogurt Natural 1kg;2025-06-09;245.32;244.05;lstm;PUE;ecommerce;4;215.88;274.76
+SKU-1004;Yogurt Natural 1kg;2025-06-16;245.79;245.83;lstm;PUE;ecommerce;4;216.30;275.28
+SKU-1004;Yogurt Natural 1kg;2025-06-23;232.31;235.69;lstm;PUE;ecommerce;4;204.43;260.19
+SKU-1004;Yogurt Natural 1kg;2025-06-30;253.52;241.34;lstm;PUE;ecommerce;4;223.10;283.94
+SKU-1004;Yogurt Natural 1kg;2025-07-07;-85.00;260.26;lstm;PUE;ecommerce;4;-103.00;-79.00
+SKU-1004;Yogurt Natural 1kg;2025-07-14;258.58;227.98;lstm;PUE;ecommerce;4;227.55;289.61
+SKU-1004;Yogurt Natural 1kg;2025-07-21;250.92;242.37;lstm;PUE;ecommerce;4;220.81;281.03
+SKU-1004;Yogurt Natural 1kg;2025-07-28;249.70;250.16;lstm;PUE;ecommerce;4;219.74;279.66
+SKU-1004;Yogurt Natural 1kg;2025-08-04;246.16;244.56;lstm;PUE;ecommerce;4;216.62;275.70
+SKU-1004;Yogurt Natural 1kg;2025-08-11;252.43;260.45;lstm;PUE;ecommerce;4;222.14;282.72
+SKU-1004;Yogurt Natural 1kg;2025-08-18;256.17;232.60;lstm;PUE;ecommerce;4;225.43;286.91
+SKU-1004;Yogurt Natural 1kg;2025-08-25;264.67;260.10;lstm;PUE;ecommerce;4;232.91;296.43
+SKU-1004;Yogurt Natural 1kg;2025-09-01;-3.10;268.38;lstm;PUE;ecommerce;4;-21.10;2.90
+SKU-1004;Yogurt Natural 1kg;2025-09-08;261.96;267.58;lstm;PUE;ecommerce;4;230.52;293.40
+SKU-1004;Yogurt Natural 1kg;2025-09-15;257.33;261.72;lstm;PUE;ecommerce;4;226.45;288.21
+SKU-1004;Yogurt Natural 1kg;2025-09-22;277.86;272.22;lstm;PUE;ecommerce;4;244.52;311.20
+SKU-1004;Yogurt Natural 1kg;2025-09-29;275.17;-30.00;lstm;PUE;ecommerce;4;247.65;302.69
+SKU-1004;Yogurt Natural 1kg;2025-10-06;272.43;272.65;lstm;PUE;ecommerce;4;239.74;305.12
+SKU-1004;Yogurt Natural 1kg;2025-10-13;291.19;286.70;lstm;PUE;ecommerce;4;256.25;326.13
+SKU-1004;Yogurt Natural 1kg;2025-10-20;283.56;291.28;lstm;PUE;ecommerce;4;249.53;317.59
+SKU-1004;Yogurt Natural 1kg;2025-10-27;292.78;284.46;lstm;PUE;ecommerce;4;257.65;327.91
+SKU-1004;Yogurt Natural 1kg;2025-11-03;-22.40;302.67;lstm;PUE;ecommerce;4;-40.40;-16.40
+SKU-1004;Yogurt Natural 1kg;2025-11-10;300.70;307.25;lstm;PUE;ecommerce;4;264.62;336.78
+SKU-1004;Yogurt Natural 1kg;2025-11-17;307.18;307.15;lstm;PUE;ecommerce;4;270.32;344.04
+SKU-1004;Yogurt Natural 1kg;2025-11-24;305.18;306.59;lstm;PUE;ecommerce;4;268.56;341.80
+SKU-1004;Yogurt Natural 1kg;2025-12-01;306.44;-4.75;lstm;PUE;ecommerce;4;275.80;337.08
+SKU-1004;Yogurt Natural 1kg;2025-12-08;307.93;309.40;lstm;PUE;ecommerce;4;270.98;344.88
+SKU-1004;Yogurt Natural 1kg;2025-12-15;-61.00;320.42;lstm;PUE;ecommerce;4;-79.00;-55.00
+SKU-1004;Yogurt Natural 1kg;2025-12-22;304.36;299.99;lstm;PUE;ecommerce;4;267.84;340.88
+SKU-1004;Yogurt Natural 1kg;2025-12-29;315.85;316.89;lstm;PUE;ecommerce;4;277.95;353.75
+SKU-1005;Detergente Líquido 3L;2025-01-06;225.56;236.76;ets;QRO;autoservicio;4;193.98;257.13
+SKU-1005;Detergente Líquido 3L;2025-01-13;241.54;241.60;ets;QRO;autoservicio;4;207.73;275.36
+SKU-1005;Detergente Líquido 3L;2025-01-20;240.25;243.57;ets;QRO;autoservicio;4;206.62;273.89
+SKU-1005;Detergente Líquido 3L;2025-01-27;248.02;241.97;ets;QRO;autoservicio;4;213.30;282.74
+SKU-1005;Detergente Líquido 3L;2025-02-03;242.81;246.01;ets;QRO;autoservicio;4;208.82;276.80
+SKU-1005;Detergente Líquido 3L;2025-02-10;255.90;254.92;ets;QRO;autoservicio;4;220.07;291.72
+SKU-1005;Detergente Líquido 3L;2025-02-17;252.35;251.16;ets;QRO;autoservicio;4;217.02;287.68
+SKU-1005;Detergente Líquido 3L;2025-02-24;249.17;245.02;ets;QRO;autoservicio;4;214.29;284.06
+SKU-1005;Detergente Líquido 3L;2025-05-05;223.59;232.70;ets;QRO;autoservicio;4;192.29;254.89
+SKU-1005;Detergente Líquido 3L;2025-05-12;215.49;205.81;ets;QRO;autoservicio;4;185.32;245.66
+SKU-1005;Detergente Líquido 3L;2025-05-19;217.06;207.01;ets;QRO;autoservicio;4;186.67;247.45
+SKU-1005;Detergente Líquido 3L;2025-05-26;201.86;203.00;ets;QRO;autoservicio;4;173.60;230.12
+SKU-1005;Detergente Líquido 3L;2025-06-02;197.99;195.81;ets;QRO;autoservicio;4;170.27;225.71
+SKU-1005;Detergente Líquido 3L;2025-06-09;201.50;205.63;ets;QRO;autoservicio;4;173.29;229.71
+SKU-1005;Detergente Líquido 3L;2025-06-16;194.57;198.50;ets;QRO;autoservicio;4;167.33;221.81
+SKU-1005;Detergente Líquido 3L;2025-06-23;188.83;190.19;ets;QRO;autoservicio;4;162.40;215.27
+SKU-1005;Detergente Líquido 3L;2025-06-30;187.10;180.56;ets;QRO;autoservicio;4;160.90;213.29
+SKU-1005;Detergente Líquido 3L;2025-07-07;182.21;181.18;ets;QRO;autoservicio;4;156.70;207.72
+SKU-1005;Detergente Líquido 3L;2025-07-14;176.60;181.05;ets;QRO;autoservicio;4;151.88;201.32
+SKU-1005;Detergente Líquido 3L;2025-07-21;178.54;179.18;ets;QRO;autoservicio;4;153.54;203.53
+SKU-1005;Detergente Líquido 3L;2025-08-04;178.89;177.57;ets;QRO;autoservicio;4;153.85;203.94
+SKU-1005;Detergente Líquido 3L;2025-08-11;174.93;177.72;ets;QRO;autoservicio;4;150.44;199.42
+SKU-1005;Detergente Líquido 3L;2025-08-18;174.84;166.05;ets;QRO;autoservicio;4;150.36;199.31
+SKU-1005;Detergente Líquido 3L;2025-08-25;167.55;167.12;ets;QRO;autoservicio;4;144.10;191.01
+SKU-1005;Detergente Líquido 3L;2025-09-01;164.80;175.41;ets;QRO;autoservicio;4;141.73;187.87
+SKU-1005;Detergente Líquido 3L;2025-09-08;163.53;166.38;ets;QRO;autoservicio;4;140.63;186.42
+SKU-1005;Detergente Líquido 3L;2025-09-15;169.77;170.03;ets;QRO;autoservicio;4;146.00;193.53
+SKU-1005;Detergente Líquido 3L;2025-09-22;174.87;174.96;ets;QRO;autoservicio;4;150.39;199.35
+SKU-1005;Detergente Líquido 3L;2025-09-29;176.15;163.43;ets;QRO;autoservicio;4;151.49;200.81
+SKU-1005;Detergente Líquido 3L;2025-10-06;182.29;187.03;ets;QRO;autoservicio;4;156.77;207.80
+SKU-1005;Detergente Líquido 3L;2025-10-13;181.38;179.02;ets;QRO;autoservicio;4;155.99;206.77
+SKU-1005;Detergente Líquido 3L;2025-10-27;196.11;197.77;ets;QRO;autoservicio;4;168.65;223.56
+SKU-1005;Detergente Líquido 3L;2025-11-03;200.49;190.47;ets;QRO;autoservicio;4;172.42;228.56
+SKU-1005;Detergente Líquido 3L;2025-11-10;197.49;197.29;ets;QRO;autoservicio;4;169.84;225.14
+SKU-1005;Detergente Líquido 3L;2025-11-17;204.37;201.42;ets;QRO;autoservicio;4;175.75;232.98
+SKU-1005;Detergente Líquido 3L;2025-11-24;207.96;209.80;ets;QRO;autoservicio;4;178.84;237.07
+SKU-1005;Detergente Líquido 3L;2025-12-01;215.42;211.08;ets;QRO;autoservicio;4;185.26;245.58
+SKU-1005;Detergente Líquido 3L;2025-12-08;218.30;229.24;ets;QRO;autoservicio;4;187.74;248.87
+SKU-1005;Detergente Líquido 3L;2025-12-15;230.84;220.24;ets;QRO;autoservicio;4;198.53;263.16
+SKU-1005;Detergente Líquido 3L;2025-12-22;226.53;229.86;ets;QRO;autoservicio;4;194.81;258.24
+SKU-1005;Detergente Líquido 3L;2025-12-29;231.06;237.34;ets;QRO;autoservicio;4;198.71;263.40
+SKU-1006;Sal de Mesa 1kg;2025-01-06;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-01-13;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-01-20;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-01-27;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-02-03;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-02-10;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-02-17;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-02-24;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-03-03;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-03-10;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-03-17;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-03-24;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-03-31;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-04-07;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-04-14;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-04-21;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-04-28;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-05-05;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-05-12;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-05-19;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-05-26;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-06-02;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-06-09;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-06-16;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-06-23;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-06-30;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-07-07;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-07-14;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-07-21;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-07-28;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-08-04;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-08-11;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-08-18;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-08-25;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-09-01;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-09-08;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-09-15;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-09-22;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-09-29;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-10-06;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-10-13;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-10-20;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-10-27;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-11-03;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-11-10;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-11-17;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-11-24;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-12-01;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-12-08;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-12-15;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-12-22;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1006;Sal de Mesa 1kg;2025-12-29;86.00;86.00;naive;TIJ;mayoreo;4;80.00;92.00
+SKU-1007;Snack Picante 45g;2025-01-06;49.44;48.00;holt;MID;ecommerce;4;37.08;66.74
+SKU-1007;Snack Picante 45g;2025-01-13;52.31;50.59;holt;MID;ecommerce;4;39.23;70.62
+SKU-1007;Snack Picante 45g;2025-01-20;54.83;52.82;holt;MID;ecommerce;4;41.12;74.02
+SKU-1007;Snack Picante 45g;2025-01-27;56.73;54.44;holt;MID;ecommerce;4;42.55;76.58
+SKU-1007;Snack Picante 45g;2025-02-03;57.87;55.33;holt;MID;ecommerce;4;43.40;78.13
+SKU-1007;Snack Picante 45g;2025-02-10;58.32;55.55;holt;MID;ecommerce;4;43.74;78.74
+SKU-1007;Snack Picante 45g;2025-02-17;58.31;55.32;holt;MID;ecommerce;4;43.73;78.72
+SKU-1007;Snack Picante 45g;2025-02-24;58.19;55.00;holt;MID;ecommerce;4;43.64;78.55
+SKU-1007;Snack Picante 45g;2025-03-03;58.34;54.93;holt;MID;ecommerce;4;43.75;78.75
+SKU-1007;Snack Picante 45g;2025-03-10;59.07;55.42;holt;MID;ecommerce;4;44.31;79.75
+SKU-1007;Snack Picante 45g;2025-03-17;60.59;56.62;holt;MID;ecommerce;4;45.44;81.79
+SKU-1007;Snack Picante 45g;2025-03-24;62.86;58.53;holt;MID;ecommerce;4;47.15;84.87
+SKU-1007;Snack Picante 45g;2025-03-31;65.72;60.96;holt;MID;ecommerce;4;49.29;88.72
+SKU-1007;Snack Picante 45g;2025-04-07;68.81;63.60;holt;MID;ecommerce;4;51.61;92.89
+SKU-1007;Snack Picante 45g;2025-04-14;71.75;66.07;holt;MID;ecommerce;4;53.81;96.87
+SKU-1007;Snack Picante 45g;2025-04-21;74.19;68.06;holt;MID;ecommerce;4;55.64;100.16
+SKU-1007;Snack Picante 45g;2025-04-28;75.89;69.37;holt;MID;ecommerce;4;56.92;102.45
+SKU-1007;Snack Picante 45g;2025-05-05;76.80;69.95;holt;MID;ecommerce;4;57.60;103.68
+SKU-1007;Snack Picante 45g;2025-05-12;77.07;69.94;holt;MID;ecommerce;4;57.80;104.04
+SKU-1007;Snack Picante 45g;2025-05-19;77.00;69.62;holt;MID;ecommerce;4;57.75;103.96
+SKU-1007;Snack Picante 45g;2025-05-26;77.00;69.37;holt;MID;ecommerce;4;57.75;103.95
+SKU-1007;Snack Picante 45g;2025-06-02;77.44;69.51;holt;MID;ecommerce;4;58.08;104.54
+SKU-1007;Snack Picante 45g;2025-06-09;78.60;70.30;holt;MID;ecommerce;4;58.95;106.10
+SKU-1007;Snack Picante 45g;2025-06-16;80.59;71.82;holt;MID;ecommerce;4;60.44;108.79
+SKU-1007;Snack Picante 45g;2025-06-23;83.31;73.99;holt;MID;ecommerce;4;62.48;112.47
+SKU-1007;Snack Picante 45g;2025-06-30;86.50;76.55;holt;MID;ecommerce;4;64.88;116.78
+SKU-1007;Snack Picante 45g;2025-07-07;76.75;76.75;holt;MID;ecommerce;4;57.56;103.61
+SKU-1007;Snack Picante 45g;2025-07-14;104.99;92.10;holt;MID;ecommerce;4;78.75;141.74
+SKU-1007;Snack Picante 45g;2025-07-21;143.63;110.52;holt;MID;ecommerce;4;107.72;193.90
+SKU-1007;Snack Picante 45g;2025-07-28;196.49;132.62;holt;MID;ecommerce;4;147.37;265.26
+SKU-1007;Snack Picante 45g;2025-08-04;268.80;159.15;holt;MID;ecommerce;4;201.60;362.87
+SKU-1007;Snack Picante 45g;2025-08-11;367.71;190.98;holt;MID;ecommerce;4;275.78;496.41
+SKU-1007;Snack Picante 45g;2025-08-18;503.03;229.17;holt;MID;ecommerce;4;377.27;679.09
+SKU-1007;Snack Picante 45g;2025-08-25;688.15;275.01;holt;MID;ecommerce;4;516.11;929.00
+SKU-1007;Snack Picante 45g;2025-09-01;941.38;330.01;holt;MID;ecommerce;4;706.04;1270.87
+SKU-1007;Snack Picante 45g;2025-09-08;1287.81;396.01;holt;MID;ecommerce;4;965.86;1738.55
+SKU-1007;Snack Picante 45g;2025-09-15;1761.73;475.22;holt;MID;ecommerce;4;1321.30;2378.34
+SKU-1007;Snack Picante 45g;2025-09-22;2410.05;570.26;holt;MID;ecommerce;4;1807.54;3253.56
+SKU-1007;Snack Picante 45g;2025-09-29;3296.94;684.31;holt;MID;ecommerce;4;2472.71;4450.87
+SKU-1007;Snack Picante 45g;2025-10-06;4510.22;821.17;holt;MID;ecommerce;4;3382.66;6088.80
+SKU-1007;Snack Picante 45g;2025-10-13;6169.98;985.41;holt;MID;ecommerce;4;4627.48;8329.47
+SKU-1007;Snack Picante 45g;2025-10-20;8440.53;1182.49;holt;MID;ecommerce;4;6330.40;11394.72
+SKU-1007;Snack Picante 45g;2025-10-27;11546.65;1418.99;holt;MID;ecommerce;4;8659.99;15587.98
+SKU-1007;Snack Picante 45g;2025-11-03;15795.82;1702.78;holt;MID;ecommerce;4;11846.86;21324.35
+SKU-1007;Snack Picante 45g;2025-11-10;21608.67;2043.34;holt;MID;ecommerce;4;16206.51;29171.71
+SKU-1007;Snack Picante 45g;2025-11-17;29560.67;2452.01;holt;MID;ecommerce;4;22170.50;39906.90
+SKU-1007;Snack Picante 45g;2025-11-24;40438.99;2942.41;holt;MID;ecommerce;4;30329.24;54592.64
+SKU-1007;Snack Picante 45g;2025-12-01;55320.54;3530.89;holt;MID;ecommerce;4;41490.41;74682.73
+SKU-1007;Snack Picante 45g;2025-12-08;75678.50;4237.07;holt;MID;ecommerce;4;56758.88;102165.98
+SKU-1007;Snack Picante 45g;2025-12-15;103528.19;5084.49;holt;MID;ecommerce;4;77646.14;139763.06
+SKU-1007;Snack Picante 45g;2025-12-22;141626.56;6101.38;holt;MID;ecommerce;4;106219.92;191195.86
+SKU-1007;Snack Picante 45g;2025-12-29;193745.14;7321.66;holt;MID;ecommerce;4;145308.86;261555.94
+SKU-1008;Agua Mineral 600ml;2025-01-06;362.27;367.54;lightgbm;LEO;autoservicio;4;326.05;398.50
+SKU-1008;Agua Mineral 600ml;2025-01-13;378.81;377.44;lightgbm;LEO;autoservicio;4;340.93;416.69
+SKU-1008;Agua Mineral 600ml;2025-01-13;378.81;377.44;lightgbm;LEO;autoservicio;4;340.93;416.69
+SKU-1008;Agua Mineral 600ml;2025-01-20;388.46;377.48;lightgbm;LEO;autoservicio;4;349.61;427.30
+SKU-1008;Agua Mineral 600ml;2025-01-27;390.26;389.31;lightgbm;LEO;autoservicio;4;351.24;429.29
+SKU-1008;Agua Mineral 600ml;2025-02-03;391.46;385.44;lightgbm;LEO;autoservicio;4;352.32;430.61
+SKU-1008;Agua Mineral 600ml;2025-02-10;403.75;405.33;lightgbm;LEO;autoservicio;4;363.38;444.13
+SKU-1008;Agua Mineral 600ml;2025-02-10;1084.38;162.13;lightgbm;LEO;autoservicio;4;867.50;1301.26
+SKU-1008;Agua Mineral 600ml;2025-02-17;404.63;408.97;lightgbm;LEO;autoservicio;4;364.17;445.10
+SKU-1008;Agua Mineral 600ml;2025-02-24;421.79;422.28;lightgbm;LEO;autoservicio;4;379.61;463.97
+SKU-1008;Agua Mineral 600ml;2025-03-03;421.73;428.49;lightgbm;LEO;autoservicio;4;379.56;463.91
+SKU-1008;Agua Mineral 600ml;2025-03-10;437.15;432.65;lightgbm;LEO;autoservicio;4;393.43;480.86
+SKU-1008;Agua Mineral 600ml;2025-03-17;447.56;443.07;lightgbm;LEO;autoservicio;4;402.81;492.32
+SKU-1008;Agua Mineral 600ml;2025-03-17;447.56;443.07;lightgbm;LEO;autoservicio;4;402.81;492.32
+SKU-1008;Agua Mineral 600ml;2025-03-24;453.77;450.63;lightgbm;LEO;autoservicio;4;408.39;499.15
+SKU-1008;Agua Mineral 600ml;2025-03-31;456.02;451.20;lightgbm;LEO;autoservicio;4;410.42;501.62
+SKU-1008;Agua Mineral 600ml;2025-04-07;469.79;462.20;lightgbm;LEO;autoservicio;4;422.81;516.77
+SKU-1008;Agua Mineral 600ml;2025-04-14;473.93;466.30;lightgbm;LEO;autoservicio;4;426.54;521.32
+SKU-1008;Agua Mineral 600ml;2025-04-14;1259.83;186.52;lightgbm;LEO;autoservicio;4;1007.86;1511.80
+SKU-1008;Agua Mineral 600ml;2025-04-21;468.04;471.12;lightgbm;LEO;autoservicio;4;421.23;514.84
+SKU-1008;Agua Mineral 600ml;2025-04-28;474.33;489.32;lightgbm;LEO;autoservicio;4;426.90;521.77
+SKU-1008;Agua Mineral 600ml;2025-05-05;488.79;485.57;lightgbm;LEO;autoservicio;4;439.91;537.66
+SKU-1008;Agua Mineral 600ml;2025-05-12;491.41;491.40;lightgbm;LEO;autoservicio;4;442.27;540.55
+SKU-1008;Agua Mineral 600ml;2025-05-19;481.27;501.05;lightgbm;LEO;autoservicio;4;433.14;529.39
+SKU-1008;Agua Mineral 600ml;2025-05-26;491.76;501.12;lightgbm;LEO;autoservicio;4;442.58;540.93
+SKU-1008;Agua Mineral 600ml;2025-05-26;491.76;501.12;lightgbm;LEO;autoservicio;4;442.58;540.93
+SKU-1008;Agua Mineral 600ml;2025-06-02;501.53;483.22;lightgbm;LEO;autoservicio;4;451.38;551.69
+SKU-1008;Agua Mineral 600ml;2025-06-02;1328.82;193.29;lightgbm;LEO;autoservicio;4;1063.06;1594.58
+SKU-1008;Agua Mineral 600ml;2025-06-09;488.42;491.55;lightgbm;LEO;autoservicio;4;439.58;537.27
+SKU-1008;Agua Mineral 600ml;2025-06-16;476.40;491.61;lightgbm;LEO;autoservicio;4;428.76;524.04
+SKU-1008;Agua Mineral 600ml;2025-06-23;477.44;483.77;lightgbm;LEO;autoservicio;4;429.70;525.19
+SKU-1008;Agua Mineral 600ml;2025-06-30;482.20;486.54;lightgbm;LEO;autoservicio;4;433.98;530.42
+SKU-1008;Agua Mineral 600ml;2025-07-07;472.58;462.55;lightgbm;LEO;autoservicio;4;425.32;519.84
+SKU-1008;Agua Mineral 600ml;2025-07-14;466.97;458.06;lightgbm;LEO;autoservicio;4;420.27;513.67
+SKU-1008;Agua Mineral 600ml;2025-07-21;465.08;468.24;lightgbm;LEO;autoservicio;4;418.57;511.59
+SKU-1008;Agua Mineral 600ml;2025-07-28;451.76;442.26;lightgbm;LEO;autoservicio;4;406.58;496.94
+SKU-1008;Agua Mineral 600ml;2025-08-04;447.54;449.85;lightgbm;LEO;autoservicio;4;402.78;492.29
+SKU-1008;Agua Mineral 600ml;2025-08-11;440.24;427.84;lightgbm;LEO;autoservicio;4;396.22;484.26
+SKU-1008;Agua Mineral 600ml;2025-08-18;437.35;434.59;lightgbm;LEO;autoservicio;4;393.62;481.09
+SKU-1008;Agua Mineral 600ml;2025-08-25;424.57;421.18;lightgbm;LEO;autoservicio;4;382.12;467.03
+SKU-1008;Agua Mineral 600ml;2025-08-25;424.57;421.18;lightgbm;LEO;autoservicio;4;382.12;467.03
+SKU-1008;Agua Mineral 600ml;2025-09-01;409.07;420.33;lightgbm;LEO;autoservicio;4;368.16;449.98
+SKU-1008;Agua Mineral 600ml;2025-09-01;1097.67;168.13;lightgbm;LEO;autoservicio;4;878.14;1317.20
+SKU-1008;Agua Mineral 600ml;2025-09-08;406.23;410.03;lightgbm;LEO;autoservicio;4;365.60;446.85
+SKU-1008;Agua Mineral 600ml;2025-09-15;396.40;396.71;lightgbm;LEO;autoservicio;4;356.76;436.04
+SKU-1008;Agua Mineral 600ml;2025-09-22;380.87;384.36;lightgbm;LEO;autoservicio;4;342.78;418.95
+SKU-1008;Agua Mineral 600ml;2025-09-29;368.94;383.48;lightgbm;LEO;autoservicio;4;332.04;405.83
+SKU-1008;Agua Mineral 600ml;2025-10-06;369.22;368.63;lightgbm;LEO;autoservicio;4;332.30;406.14
+SKU-1008;Agua Mineral 600ml;2025-10-13;362.44;363.26;lightgbm;LEO;autoservicio;4;326.20;398.69
+SKU-1008;Agua Mineral 600ml;2025-10-20;361.58;346.37;lightgbm;LEO;autoservicio;4;325.42;397.74
+SKU-1008;Agua Mineral 600ml;2025-10-27;356.93;352.41;lightgbm;LEO;autoservicio;4;321.23;392.62
+SKU-1008;Agua Mineral 600ml;2025-11-03;354.63;357.15;lightgbm;LEO;autoservicio;4;319.17;390.10
+SKU-1008;Agua Mineral 600ml;2025-11-10;345.89;358.40;lightgbm;LEO;autoservicio;4;311.30;380.48
+SKU-1008;Agua Mineral 600ml;2025-11-17;353.04;366.65;lightgbm;LEO;autoservicio;4;317.74;388.35
+SKU-1008;Agua Mineral 600ml;2025-11-24;348.51;351.85;lightgbm;LEO;autoservicio;4;313.66;383.36
+SKU-1008;Agua Mineral 600ml;2025-11-24;348.51;351.85;lightgbm;LEO;autoservicio;4;313.66;383.36
+SKU-1008;Agua Mineral 600ml;2025-12-01;361.30;349.52;lightgbm;LEO;autoservicio;4;325.17;397.43
+SKU-1008;Agua Mineral 600ml;2025-12-08;352.32;349.68;lightgbm;LEO;autoservicio;4;317.09;387.55
+SKU-1008;Agua Mineral 600ml;2025-12-15;361.83;345.99;lightgbm;LEO;autoservicio;4;325.65;398.02
+SKU-1008;Agua Mineral 600ml;2025-12-22;355.37;357.18;lightgbm;LEO;autoservicio;4;319.83;390.91
+SKU-1008;Agua Mineral 600ml;2025-12-29;367.47;362.41;lightgbm;LEO;autoservicio;4;330.72;404.21
+SKU-1008;Agua Mineral 600ml;2025-12-29;993.68;144.96;lightgbm;LEO;autoservicio;4;794.94;1192.42
