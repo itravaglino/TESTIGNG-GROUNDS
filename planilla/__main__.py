@@ -8,6 +8,7 @@ import sys
 
 from planilla.checks import validate
 from planilla.compare import compare_sheets
+from planilla.largo import write_long
 from planilla.sheet import fixture_path, load_fixture, load_sheet
 
 
@@ -38,6 +39,13 @@ def main(argv: list[str] | None = None) -> int:
     validate_cmd.add_argument("path", nargs="?", help="CSV. Por defecto la planilla estándar.")
     validate_cmd.add_argument("--json", action="store_true")
 
+    largo = sub.add_parser(
+        "largo",
+        help="Exporta el pronóstico (nov-2026 a dic-2027) en filas producto-fecha.",
+    )
+    largo.add_argument("path", nargs="?", help="Planilla ancha. Por defecto la estándar.")
+    largo.add_argument("-o", required=True, help="CSV de salida, UTF-8, separador ;.")
+
     compare = sub.add_parser("compare", help="Compara una candidata contra la estándar.")
     compare.add_argument("path")
     compare.add_argument("--atol", type=float, default=0.01)
@@ -52,6 +60,12 @@ def main(argv: list[str] | None = None) -> int:
         else:
             _print_report(report)
         return 0 if report.ok else 1
+
+    if args.command == "largo":
+        path = args.path or fixture_path()
+        written = write_long(load_sheet(path), args.o)
+        print(f"{written} filas de pronóstico en {args.o}")
+        return 0
 
     if args.command == "validate":
         path = args.path or fixture_path()

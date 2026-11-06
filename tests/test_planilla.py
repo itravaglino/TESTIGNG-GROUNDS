@@ -4,7 +4,8 @@ from pathlib import Path
 
 from planilla.checks import validate
 from planilla.compare import compare_sheets
-from planilla.sheet import EXPECTED_MONTHS, HISTORY_COUNT, fixture_path, load_fixture, load_sheet
+from planilla.largo import write_long
+from planilla.sheet import EXPECTED_MONTHS, FORECAST_COUNT, HISTORY_COUNT, fixture_path, load_fixture, load_sheet
 
 
 class StandardSheetTest(unittest.TestCase):
@@ -63,6 +64,16 @@ class StandardSheetTest(unittest.TestCase):
         codes = {item.code for item in report.errors}
         self.assertIn("historia_entera", codes)
         self.assertFalse(report.ok)
+
+    def test_long_export_is_one_row_per_forecast_month(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "largo.csv"
+            written = write_long(self.sheet, path)
+            lines = path.read_text(encoding="utf-8").splitlines()
+        self.assertEqual(written, self.report.rows * FORECAST_COUNT)
+        self.assertEqual(lines[0], "product_id;SKU;fecha;pronostico;modelo")
+        self.assertTrue(lines[1].startswith("722344;WL7413;01/11/2026;8415,25;auto_SARIMA"))
+        self.assertTrue(lines[14].startswith("722344;WL7413;01/12/2027;"))
 
 
 if __name__ == "__main__":
