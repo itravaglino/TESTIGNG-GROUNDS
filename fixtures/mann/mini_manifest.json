@@ -1,0 +1,68 @@
+{
+  "source": "Forecast_mann_scenario_test4_unidades (planilla estándar del usuario)",
+  "file": "fixtures/mann/mann_mini.csv",
+  "rows": 12,
+  "purpose": "Correr tests en segundos sin cargar 4402 SKUs. Cada fila es un recorte real, no sintético.",
+  "skus": [
+    {
+      "product_id": "722344",
+      "sku": "WL7413",
+      "why": "auto_SARIMA, tendencia, ABC A, Error=100, WIX"
+    },
+    {
+      "product_id": "722345",
+      "sku": "WL10489A",
+      "why": "intermitente A Error=100"
+    },
+    {
+      "product_id": "722346",
+      "sku": "WL10694A",
+      "why": "demanda negativa en histórico"
+    },
+    {
+      "product_id": "722347",
+      "sku": "WL54145",
+      "why": "Holt-Winters tendencia A"
+    },
+    {
+      "product_id": "722360",
+      "sku": "W 950/26",
+      "why": "MANN-FILTER CV"
+    },
+    {
+      "product_id": "722361",
+      "sku": "W 712/75",
+      "why": "errática alto riesgo Holt-Winters"
+    },
+    {
+      "product_id": "722369",
+      "sku": "C 33 017",
+      "why": "región MTO pick up"
+    },
+    {
+      "product_id": "722377",
+      "sku": "PU 7020 Z",
+      "why": "histórico casi todo cero (serie nueva / intermitente)"
+    },
+    {
+      "product_id": "722389",
+      "sku": "HU 816/2 X",
+      "why": "prophet ABC A"
+    },
+    {
+      "product_id": "722390",
+      "sku": "C 24 028/1",
+      "why": "variable moderada"
+    },
+    {
+      "product_id": "722413",
+      "sku": "WL10455A",
+      "why": "ABC B"
+    },
+    {
+      "product_id": "722490",
+      "sku": "C 30 880/2",
+      "why": "ABC C alto riesgo CV"
+    }
+  ]
+}

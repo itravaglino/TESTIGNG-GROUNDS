@@ -1,0 +1,14 @@
+{
+  "note": "Escalas en RATIO. WAPE 0.11 = 11%. No multiplicar por 100 en el motor.",
+  "error_definition": "forecast - actual",
+  "case_m02": {
+    "actual": [10, 20, 30, 40],
+    "forecast": [12, 18, 33, 36],
+    "mae": 2.75,
+    "me": -0.25,
+    "rmse": 2.8722813232690143,
+    "mape": 0.125,
+    "wape": 0.11,
+    "smape": 0.1218955483955484
+  }
+}
